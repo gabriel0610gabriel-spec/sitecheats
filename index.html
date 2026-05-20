@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppus Shop</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        
+        /* Fundo Animado com Partículas Flutuantes */
+        body { 
+            background: #090314; 
+            color: #ffffff; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #2e0854 0%, #090314 80%);
+            z-index: -2;
+        }
+        .bg-glow {
+            position: fixed;
+            width: 600px; height: 600px;
+            background: rgba(139, 31, 245, 0.15);
+            border-radius: 50%;
+            filter: blur(120px);
+            animation: floatGlow 10s ease-in-out infinite alternate;
+            z-index: -1;
+            top: 10%; left: 10%;
+        }
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(80px, 50px) scale(1.2); }
+        }
+
+        /* Navegação */
+        nav { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; z-index: 10; }
+        .logo-nav { font-size: 1.6rem; font-weight: bold; letter-spacing: 1px; color: #fff; text-shadow: 0 0 10px rgba(139,31,245,0.5); }
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { color: #a1a1aa; text-decoration: none; font-weight: 500; transition: all 0.3s; cursor: pointer; }
+        .nav-links a:hover, .nav-links a.active { color: #c084fc; text-shadow: 0 0 8px rgba(139,31,245,0.6); }
+        .btn-nav.discord { background-color: #5865F2; padding: 10px 20px; border-radius: 8px; text-decoration: none; color: white; font-weight: bold; transition: 0.3s; }
+        .btn-nav.discord:hover { background-color: #4752c4; transform: translateY(-2px); }
+        
+        /* Controladores de Abas e Telas */
+        .tab-content { display: none; width: 100%; flex-direction: column; align-items: center; animation: fadeIn 0.5s ease-in-out; }
+        .tab-content.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ABA INÍCIO */
+        .hero-section { text-align: center; margin: 40px 0; max-width: 800px; padding: 0 20px; }
+        .hero-section h1 { font-size: 3rem; margin-bottom: 15px; background: linear-gradient(to right, #fff, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-section p { color: #a1a1aa; font-size: 1.1rem; line-height: 1.6; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 90%; max-width: 1000px; margin: 30px 0; }
+        .info-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(139, 31, 245, 0.2); border-radius: 12px; padding: 25px; text-align: center; backdrop-filter: blur(10px); transition: 0.3s; }
+        .info-card:hover { border-color: #8b1ff5; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(139,31,245,0.1); }
+        .info-card h3 { margin-bottom: 10px; color: #c084fc; }
+        .info-card p { color: #d1d5db; font-size: 0.9rem; }
+
+        .promo-banner { background: rgba(139, 31, 245, 0.1); border: 1px solid #8b1ff5; width: 90%; max-width: 600px; border-radius: 12px; padding: 30px; text-align: center; margin-top: 10px; backdrop-filter: blur(5px); box-shadow: 0 0 15px rgba(139,31,245,0.2); }
+        .btn-connect { background: #8b1ff5; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px; transition: 0.3s; }
+        .btn-connect:hover { background: #a78bfa; transform: scale(1.05); }
+        
+        /* SEÇÃO DE CATEGORIAS DE JOGOS */
+        .categories-title { text-align: center; margin-top: 30px; font-size: 2rem; color: #fff; }
+        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 90%; max-width: 900px; margin: 30px 0; }
+        .category-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(139, 31, 245, 0.3); border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.3s ease; position: relative; text-align: center; }
+        .category-card:hover { border-color: #8b1ff5; transform: scale(1.03); box-shadow: 0 0 25px rgba(139, 31, 245, 0.4); }
+        .category-img { width: 100%; height: 240px; object-fit: cover; border-bottom: 2px solid rgba(139, 31, 245, 0.3); }
+        .category-name { padding: 15px; font-size: 1.4rem; font-weight: bold; color: #fff; background: rgba(15, 10, 28, 0.8); }
+
+        /* LISTA DE PRODUTOS INDIVIDUAIS */
+        .products-container { display: none; flex-direction: column; align-items: center; width: 100%; animation: fadeIn 0.4s ease; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 30px; width: 90%; max-width: 1100px; margin: 20px 0; align-items: start; }
+        .card { background: rgba(0,0,0,0.5); border: 1px solid #8b1ff5; border-radius: 16px; padding: 30px; text-align: center; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.4s ease; display: flex; flex-direction: column; }
+        
+        /* Botões de Navegação Superior Interna */
+        .btn-back-categories { background: rgba(139, 31, 245, 0.15); color: #c084fc; border: 1px solid #8b1ff5; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-back-categories:hover { background: #8b1ff5; color: #fff; transform: translateY(-2px); }
+
+        /* Imagem do Cheat */
+        .product-img { width: 100%; height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; border: 2px solid rgba(139, 31, 245, 0.5); }
+        .card h2 { margin-bottom: 15px; font-size: 1.8rem; }
+        
+        .product-video { width: 100%; border-radius: 8px; border: 1px solid #8b1ff5; margin-bottom: 20px; background-color: #000; box-shadow: 0 0 10px rgba(139, 31, 245, 0.3); }
+
+        /* Contêiner do Fluxo de Compra Dinâmico */
+        .hidden-purchase-flow { display: none; margin-top: 20px; border-top: 1px solid rgba(139, 31, 245, 0.3); padding-top: 20px; animation: fadeIn 0.4s ease; position: relative; }
+        
+        /* Botão Minimizar Detalhes */
+        .btn-minimize { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: bold; cursor: pointer; margin-bottom: 20px; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; }
+        .btn-minimize:hover { background: #ef4444; color: #fff; transform: translateY(-1px); }
+
+        /* Seleção Dinâmica de Planos Estilizados */
+        .plans-container { display: flex; gap: 10px; margin: 15px 0 20px 0; justify-content: space-between; }
+        .plan-card { flex: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(139, 31, 245, 0.3); padding: 12px 8px; border-radius: 10px; cursor: pointer; text-align: center; transition: 0.2s; display: flex; flex-direction: column; gap: 4px; }
+        .plan-card:hover { border-color: #a78bfa; background: rgba(139, 31, 245, 0.08); }
+        .plan-card.selected { border-color: #c084fc; background: rgba(139, 31, 245, 0.25); box-shadow: 0 0 12px rgba(139,31,245,0.4); }
+        .plan-duration { font-size: 0.9rem; font-weight: bold; color: #fff; }
+        .plan-price-text { font-size: 0.85rem; color: #c084fc; font-weight: 500; }
+
+        .btn-price { background: #8b1ff5; color: #fff; border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1rem; transition: 0.3s; margin-bottom: 10px; }
+        .btn-price:hover { background: #9333ea; box-shadow: 0 0 15px #8b1ff5; }
+
+        .inner-features { text-align: left; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 10px; margin-top: 25px; border: 1px solid #3f3f46; }
+        .inner-features h3 { font-size: 1.1rem; color: #c084fc; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
+        .inner-features ul { list-style: none; font-size: 0.85rem; color: #d1d5db; margin-bottom: 15px; }
+        .inner-features ul li { margin-bottom: 5px; padding-left: 10px; position: relative; }
+        .inner-features ul li::before { content: "•"; color: #8b1ff5; position: absolute; left: 0; }
+
+        /* Modais */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-box { background: #0f0a1c; border: 2px solid #8b1ff5; border-radius: 20px; padding: 40px; width: 95%; max-width: 880px; position: relative; box-shadow: 0 0 30px rgba(139,31,245,0.4); }
+        .modal-split { display: flex; gap: 35px; align-items: center; }
+        .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; font-size: 24px; color: #a1a1aa; transition: 0.2s; }
+        .close-modal:hover { color: #fff; }
+
+        /* ÁREA E FOTO DO QR CODE GIGANTE */
+        .pix-area { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 15px; background: rgba(255,255,255,0.04); padding: 25px; border-radius: 12px; border: 1px solid rgba(139, 31, 245, 0.3); }
+        .qrcode-img { width: 320px; height: 320px; border: 8px solid #fff; border-radius: 12px; }
+        .btn-copy { background: #22c55e; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.2s; width: 100%; max-width: 320px; }
+        .btn-copy:hover { background: #16a34a; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3); }
+        
+        /* Roleta */
+        .wheel-container { position: relative; width: 260px; height: 260px; margin: 20px auto; }
+        .wheel-pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid #fff; z-index: 10; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); }
+        #wheel { 
+            width: 100%; height: 100%; 
+            border-radius: 50%; 
+            border: 6px solid #fff; 
+            background: conic-gradient(#ef4444 0deg 90deg, #f59e0b 90deg 180deg, #22c55e 180deg 270deg, #3b82f6 270deg 360deg); 
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
+            position: relative;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+        .wheel-label { position: absolute; font-weight: bold; font-size: 0.9rem; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+        .wl-1 { top: 40px; right: 45px; transform: rotate(45deg); }
+        .wl-2 { bottom: 40px; right: 45px; transform: rotate(135deg); }
+        .wl-3 { bottom: 40px; left: 45px; transform: rotate(225deg); }
+        .wl-4 { top: 40px; left: 45px; transform: rotate(315deg); }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <nav>
+        <div class="logo-nav">Oppus Shop</div>
+        <div class="nav-links">
+            <a onclick="mudarAba('inicio')" id="tab-inicio" class="active">Início</a>
+            <a onclick="mudarAba('produtos')" id="tab-produtos">Produtos</a>
+            <a href="#" class="btn-nav discord" target="_blank">Discord</a>
+        </div>
+    </nav>
+
+    <div id="conteudo-inicio" class="tab-content active">
+        <section class="hero-section">
+            <h1>Sua Performance Elevada ao Máximo</h1>
+            <p>Seja bem-vindo à Oppus Shop. Oferecemos as melhores soluções do mercado com segurança impecável, otimização extrema e foco total na discrição do usuário.</p>
+        </section>
+
+        <div class="features-grid">
+            <div class="info-card">
+                <h3>⚡ Entrega Instantânea</h3>
+                <p>Assim que o seu pagamento via PIX for aprovado, o produto é liberado automaticamente em seu e-mail ou Discord.</p>
+            </div>
+            <div class="info-card">
+                <h3>🔒 Segurança Máxima</h3>
+                <p>Nossas ferramentas contam com sistemas de bypass avançados e atualizações diárias preventivas contra detecções.</p>
+            </div>
+            <div class="info-card">
+                <h3>🛠️ Suporte Dedicado</h3>
+                <p>Equipe pronta para te auxiliar na instalação, configuração e resposta de dúvidas diretamente em nossa central do Discord.</p>
+            </div>
+        </div>
+
+        <div class="promo-banner">
+            <h3>🎡 Teste sua Sorte na Roleta Diária!</h3>
+            <p style="color: #a1a1aa; font-size: 0.9rem; margin-top: 5px;">Ganhe cupons exclusivos de desconto para usar em nossa loja hoje mesmo.</p>
+            <button class="btn-connect" onclick="abrirModal('roleta')">Girar Roleta</button>
+        </div>
+    </div>
+
+    <div id="conteudo-produtos" class="tab-content">
+        
+        <div id="wrapper-categorias" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <h2 class="categories-title">Escolha um Jogo para Ver as Opções</h2>
+            
+            <div class="categories-grid">
+                <div class="category-card" onclick="mostrarProdutosJogo('jogo-r6')">
+                    <img src="r6.jpg" alt="Rainbow Six" class="category-img">
+                    <div class="category-name">Rainbow Six Siege</div>
+                </div>
+
+                <div class="category-card" onclick="mostrarProdutosJogo('jogo-dayz')">
+                    <img src="dayZ.jpg" alt="DayZ" class="category-img">
+                    <div class="category-name">DayZ</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="jogo-r6" class="products-container">
+            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-r6')">⬅ Voltar para Categorias</button>
+            
+            <div class="products-grid">
+                <div class="card">
+                    <img src="r6cheat rage.jpg" alt="R6 Oppus Rage" class="product-img">
+                    <h2>R6 Oppus Rage</h2>
+                    
+                    <button id="btnR6" class="btn-price" onclick="revelarFluxo('fluxoR6', 'btnR6')">Ver Planos e Recursos</button>
+                    
+                    <div id="fluxoR6" class="hidden-purchase-flow">
+                        <button class="btn-minimize" onclick="minimizarFluxo('fluxoR6', 'btnR6')">✕ Minimizar Detalhes</button>
+
+                        <video class="product-video" controls>
+                            <source src="crusader_intro - Trim.mp4" type="video/mp4">
+                            Seu navegador não suporta a exibição de vídeos.
+                        </video>
+
+                        <p style="color: #c084fc; font-weight: bold; font-size: 0.95rem;">Selecione o plano desejado:</p>
+                        
+                        <div class="plans-container">
+                            <div class="plan-card selected" id="plan-r6-1" onclick="selecionarPlanoCard('r6', '1', '30.00', 'R6 Oppus Rage - 1 Dia', 'r6cheat rage.jpg')">
+                                <span class="plan-duration">1 Dia</span>
+                                <span class="plan-price-text">R$ 30,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-r6-7" onclick="selecionarPlanoCard('r6', '7', '140.00', 'R6 Oppus Rage - 7 Dias', 'r6cheat rage.jpg')">
+                                <span class="plan-duration">7 Dias</span>
+                                <span class="plan-price-text">R$ 140,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-r6-30" onclick="selecionarPlanoCard('r6', '30', '300.00', 'R6 Oppus Rage - 30 Dias', 'r6cheat rage.jpg')">
+                                <span class="plan-duration">30 Dias</span>
+                                <span class="plan-price-text">R$ 300,00</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-price" onclick="abrirCompraDinamica('r6')" style="background: #22c55e;">Comprar Agora</button>
+
+                        <div class="inner-features">
+                            <h3>📋 Recursos Oppus R6S</h3>
+                            <strong style="font-size:0.85rem; color:#fff; display:block; margin-bottom:5px;">Player ESP</strong>
+                            <ul>
+                                <li>Players: Mostra alvos através de estruturas</li>
+                                <li>ESP Box / ESP Line (Topo, Centro, Base)</li>
+                                <li>Skeleton (Esqueletos) & Name (Nicknames)</li>
+                                <li>Head Hitbox & Health (Barra ou Texto HP)</li>
+                                <li>Team Check (Não puxa em aliados)</li>
+                            </ul>
+                            <strong style="font-size:0.85rem; color:#fff; display:block; margin-bottom:5px;">Aimbot & Misc</strong>
+                            <ul>
+                                <li>Active Aimbot (Auxílio de mira customizável)</li>
+                                <li>Aimbot Keys (2 teclas configuráveis)</li>
+                                <li>FOV Size/Draw & Hitboxes (Ossos específicos)</li>
+                                <li>Crosshair Estática & Hit Damage Effect</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="jogo-dayz" class="products-container">
+            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-dayz')">⬅ Voltar para Categorias</button>
+            
+            <div class="products-grid">
+                <div class="card">
+                    <img src="dayz cheat rage.png" alt="DayZ Oppus Rage" class="product-img">
+                    <h2>DayZ Oppus Rage</h2>
+                    
+                    <button id="btnDayZ" class="btn-price" onclick="revelarFluxo('fluxoDayZ', 'btnDayZ')">Ver Planos e Recursos</button>
+                    
+                    <div id="fluxoDayZ" class="hidden-purchase-flow">
+                        <button class="btn-minimize" onclick="minimizarFluxo('fluxoDayZ', 'btnDayZ')">✕ Minimizar Detalhes</button>
+
+                        <video class="product-video" controls>
+                            <source src="DayZAuthority - Trim.mp4" type="video/mp4">
+                            Seu navegador não suporta a exibição de vídeos.
+                        </video>
+
+                        <p style="color: #c084fc; font-weight: bold; font-size: 0.95rem;">Selecione o plano desejado:</p>
+                        
+                        <div class="plans-container">
+                            <div class="plan-card selected" id="plan-dayz-1" onclick="selecionarPlanoCard('dayz', '1', '30.00', 'DayZ Oppus Rage - 1 Dia', 'dayz cheat rage.png')">
+                                <span class="plan-duration">1 Dia</span>
+                                <span class="plan-price-text">R$ 30,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-dayz-7" onclick="selecionarPlanoCard('dayz', '7', '115.00', 'DayZ Oppus Rage - 7 Dias', 'dayz cheat rage.png')">
+                                <span class="plan-duration">7 Dias</span>
+                                <span class="plan-price-text">R$ 115,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-dayz-30" onclick="selecionarPlanoCard('dayz', '30', '220.00', 'DayZ Oppus Rage - 30 Dias', 'dayz cheat rage.png')">
+                                <span class="plan-duration">30 Dias</span>
+                                <span class="plan-price-text">R$ 220,00</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-price" onclick="abrirCompraDinamica('dayz')" style="background: #22c55e;">Comprar Agora</button>
+
+                        <div class="inner-features">
+                            <h3>📋 Recursos Oppus DayZ</h3>
+                            <strong style="font-size:0.85rem; color:#fff; display:block; margin-bottom:5px;">Visuals & ESP</strong>
+                            <ul>
+                                <li>Player ESP (Esqueleto, Caixa 2D/3D e Linhas)</li>
+                                <li>Zombie ESP (Filtragem e distância de infectados)</li>
+                                <li>Loot & Item ESP (Armas, Roupas, Comida e Medicina)</li>
+                                <li>Exibição de Distância e Itens nas Mãos do Alvo</li>
+                                <li>World ESP (Carros, Construções e Bases)</li>
+                            </ul>
+                            <strong style="font-size:0.85rem; color:#fff; display:block; margin-bottom:5px;">Aimbot & Exploit</strong>
+                            <ul>
+                                <li>Silent Aimbot com FOV Ajustável</li>
+                                <li>Alvo customizável (Cabeça, Pescoço, Corpo)</li>
+                                <li>Noclip Avançado (Atravessar superfícies e voar)</li>
+                                <li>Always Day (Sempre Dia no mapa)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="modalPagamento" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-modal" onclick="fecharModal('modalPagamento')">✕</span>
+            <div class="modal-split">
+                <img id="modalProdutoImg" src="" style="width: 300px; background: white; padding: 10px; border-radius: 10px; object-fit: contain;">
+                <div style="flex: 1;">
+                    <h2 id="modalProdutoNome" style="margin-bottom:5px;">Produto</h2>
+                    <div id="modalProdutoValor" style="font-size: 2.2rem; color: #8b1ff5; font-weight: bold; margin-bottom: 10px;">R$ 0,00</div>
+                    <p style="margin-bottom: 10px; color: #a1a1aa; font-size: 0.9rem;">Escaneie o QR Code abaixo ou utilize o PIX Copia e Cola:</p>
+                    
+                    <div class="pix-area">
+                        <img class="qrcode-img" src="qrcode.png" alt="QR Code PIX">
+                        <button class="btn-copy" onclick="copiarChavePix()">📋 Copiar Chave PIX</button>
+                    </div>
+
+                    <a href="#" class="btn-nav discord" style="display:inline-block; padding: 12px 25px; margin-top: 15px; width: 100%; text-align: center;">Suporte no Discord</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalRoleta" class="modal-overlay">
+        <div class="modal-box" style="text-align: center; max-width: 420px;">
+            <span class="close-modal" onclick="fecharModal('modalRoleta')">✕</span>
+            <h2>🎡 Roleta da Sorte</h2>
+            <p style="color: #a1a1aa; font-size: 0.85rem; margin-top: 5px;">Gire para conquistar seu cupom diário!</p>
+            
+            <div class="wheel-container">
+                <div class="wheel-pointer"></div>
+                <div id="wheel">
+                    <div class="wheel-label wl-1">5% OFF</div>
+                    <div class="wheel-label wl-2">10% OFF</div>
+                    <div class="wheel-label wl-3">3% OFF</div>
+                    <div class="wheel-label wl-4">15% OFF</div>
+                </div>
+            </div>
+            
+            <button class="btn-price" onclick="giraRoleta()">Girar!</button>
+        </div>
+    </div>
+
+    <script>
+        const dadosPlanos = {
+            r6: { valor: "30.00", nome: "R6 Oppus Rage - 1 Dia", img: "r6cheat rage.jpg" },
+            dayz: { valor: "30.00", nome: "DayZ Oppus Rage - 1 Dia", img: "dayz cheat rage.png" }
+        };
+
+        function mudarAba(aba) {
+            document.getElementById('conteudo-inicio').classList.remove('active');
+            document.getElementById('conteudo-produtos').classList.remove('active');
+            document.getElementById('tab-inicio').classList.remove('active');
+            document.getElementById('tab-produtos').classList.remove('active');
+            
+            if(aba === 'inicio') {
+                document.getElementById('conteudo-inicio').classList.add('active');
+                document.getElementById('tab-inicio').classList.add('active');
+            } else if(aba === 'produtos') {
+                document.getElementById('conteudo-produtos').classList.add('active');
+                document.getElementById('tab-produtos').classList.add('active');
+                
+                document.getElementById('wrapper-categorias').style.display = 'flex';
+                document.getElementById('jogo-r6').style.display = 'none';
+                document.getElementById('jogo-dayz').style.display = 'none';
+            }
+        }
+
+        function mostrarProdutosJogo(idJogo) {
+            document.getElementById('wrapper-categorias').style.display = 'none';
+            document.getElementById(idJogo).style.display = 'flex';
+        }
+
+        function voltarParaCategorias(idJogo) {
+            document.getElementById(idJogo).style.display = 'none';
+            document.getElementById('wrapper-categorias').style.display = 'flex';
+        }
+
+        function revelarFluxo(idFluxo, idBotao) {
+            document.getElementById(idBotao).style.display = 'none';
+            document.getElementById(idFluxo).style.display = 'block';
+        }
+
+        function minimizarFluxo(idFluxo, idBotao) {
+            document.getElementById(idFluxo).style.display = 'none';
+            document.getElementById(idBotao).style.display = 'block';
+        }
+
+        function selecionarPlanoCard(produto, dias, valor, nome, img) {
+            const cards = document.querySelectorAll(`[id^="plan-${produto}-"]`);
+            cards.forEach(card => card.classList.remove('selected'));
+            
+            document.getElementById(`plan-${produto}-${dias}`).classList.add('selected');
+            dadosPlanos[produto] = { valor, nome, img };
+        }
+
+        function abrirCompraDinamica(produto) {
+            const planoEscolhido = dadosPlanos[produto];
+            
+            document.getElementById('modalProdutoNome').textContent = planoEscolhido.nome;
+            document.getElementById('modalProdutoValor').textContent = "R$ " + planoEscolhido.valor;
+            document.getElementById('modalProdutoImg').src = planoEscolhido.img;
+            
+            document.getElementById('modalPagamento').style.display = 'flex';
+        }
+
+        function copiarChavePix() {
+            const chaveFicticia = "suachavepixaqui123456789000000000000000000000000000";
+            navigator.clipboard.writeText(chaveFicticia);
+            alert("Chave PIX Copia e Cola copiada com sucesso!");
+        }
+
+        let jaGirou = false;
+        function giraRoleta() {
+            if(jaGirou) {
+                alert("Você já realizou o seu giro diário!");
+                return;
+            }
+            jaGirou = true;
+            
+            const roda = document.getElementById('wheel');
+            const grausAleatorios = Math.floor(Math.random() * 360) + 1800; 
+            roda.style.transform = `rotate(${grausAleatorios}deg)`;
+            
+            setTimeout(() => {
+                const anguloFinal = grausAleatorios % 360;
+                let premio = "";
+                
+                if(anguloFinal >= 0 && anguloFinal < 90) premio = "15% OFF";
+                else if(anguloFinal >= 90 && anguloFinal < 180) premio = "3% OFF";
+                else if(anguloFinal >= 180 && anguloFinal < 270) premio = "10% OFF";
+                else premio = "5% OFF";
+                
+                alert(`🎉 Parabéns! Você ganhou um cupom de ${premio}. Abra um ticket no Discord para resgatar!`);
+            }, 4000);
+        }
+
+        function abrirModal(tipo) {
+            if(tipo === 'roleta') document.getElementById('modalRoleta').style.display = 'flex';
+        }
+        
+        function fecharModal(id) { 
+            document.getElementById(id).style.display = 'none'; 
+        }
+    </script>
+</body>
+</html>
