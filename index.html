@@ -3,135 +3,433 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oppus Shop</title>
+    <title>Oppus Shop | Premium Performance</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        :root {
+            --bg-primary: #06020e;
+            --bg-secondary: #0d061f;
+            --accent: #8b1ff5;
+            --accent-glow: rgba(139, 31, 245, 0.4);
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --success: #22c55e;
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-border: rgba(139, 31, 245, 0.15);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif; 
+        }
         
-        /* Fundo Animado com Partículas Flutuantes */
         body { 
-            background: #090314; 
-            color: #ffffff; 
+            background: var(--bg-primary); 
+            color: var(--text-main); 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
             align-items: center;
             overflow-x: hidden;
             position: relative;
+            line-height: 1.5;
         }
+
+        /* Fundo com efeito de profundidade */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #2e0854 0%, #090314 80%);
+            background: radial-gradient(circle at 50% -20%, #1e0b36 0%, #06020e 60%);
             z-index: -2;
         }
+
         .bg-glow {
             position: fixed;
-            width: 600px; height: 600px;
-            background: rgba(139, 31, 245, 0.15);
+            width: 500px; height: 500px;
+            background: rgba(139, 31, 245, 0.12);
             border-radius: 50%;
-            filter: blur(120px);
-            animation: floatGlow 10s ease-in-out infinite alternate;
+            filter: blur(100px);
+            animation: floatGlow 12s ease-in-out infinite alternate;
             z-index: -1;
-            top: 10%; left: 10%;
+            top: 20%; left: 15%;
         }
+
         @keyframes floatGlow {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(80px, 50px) scale(1.2); }
+            100% { transform: translate(60px, 40px) scale(1.15); }
         }
 
-        /* Navegação */
-        nav { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; z-index: 10; }
-        .logo-nav { font-size: 1.6rem; font-weight: bold; letter-spacing: 1px; color: #fff; text-shadow: 0 0 10px rgba(139,31,245,0.5); }
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { color: #a1a1aa; text-decoration: none; font-weight: 500; transition: all 0.3s; cursor: pointer; }
-        .nav-links a:hover, .nav-links a.active { color: #c084fc; text-shadow: 0 0 8px rgba(139,31,245,0.6); }
-        .btn-nav.discord { background-color: #5865F2; padding: 10px 20px; border-radius: 8px; text-decoration: none; color: white; font-weight: bold; transition: 0.3s; }
-        .btn-nav.discord:hover { background-color: #4752c4; transform: translateY(-2px); }
+        /* Navbar Moderna */
+        nav { 
+            width: 100%; 
+            max-width: 1200px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 25px 30px; 
+            z-index: 10; 
+        }
+
+        .logo-nav { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #fff, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(139,31,245,0.3); 
+        }
+
+        .nav-links { 
+            display: flex; 
+            gap: 30px; 
+            align-items: center; 
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 6px 6px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links a { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-size: 0.95rem;
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+
+        .nav-links a:hover, .nav-links a.active { 
+            color: #fff; 
+        }
+
+        .btn-nav.discord { 
+            background: #5865F2; 
+            padding: 8px 18px; 
+            border-radius: 20px; 
+            color: white; 
+            font-weight: 600; 
+            font-size: 0.9rem;
+            transition: 0.2s ease; 
+        }
+
+        .btn-nav.discord:hover { 
+            background: #4752c4; 
+            transform: translateY(-1px); 
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+        }
         
-        /* Controladores de Abas e Telas */
-        .tab-content { display: none; width: 100%; flex-direction: column; align-items: center; animation: fadeIn 0.5s ease-in-out; }
+        /* Sistema de Abas */
+        .tab-content { 
+            display: none; 
+            width: 100%; 
+            max-width: 1200px;
+            padding: 0 20px;
+            flex-direction: column; 
+            align-items: center; 
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+
         .tab-content.active { display: flex; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ABA INÍCIO */
-        .hero-section { text-align: center; margin: 40px 0; max-width: 800px; padding: 0 20px; }
-        .hero-section h1 { font-size: 3rem; margin-bottom: 15px; background: linear-gradient(to right, #fff, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-section p { color: #a1a1aa; font-size: 1.1rem; line-height: 1.6; }
         
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 90%; max-width: 1000px; margin: 30px 0; }
-        .info-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(139, 31, 245, 0.2); border-radius: 12px; padding: 25px; text-align: center; backdrop-filter: blur(10px); transition: 0.3s; }
-        .info-card:hover { border-color: #8b1ff5; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(139,31,245,0.1); }
-        .info-card h3 { margin-bottom: 10px; color: #c084fc; }
-        .info-card p { color: #d1d5db; font-size: 0.9rem; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(8px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
 
-        .promo-banner { background: rgba(139, 31, 245, 0.1); border: 1px solid #8b1ff5; width: 90%; max-width: 600px; border-radius: 12px; padding: 30px; text-align: center; margin-top: 10px; backdrop-filter: blur(5px); box-shadow: 0 0 15px rgba(139,31,245,0.2); }
-        .btn-connect { background: #8b1ff5; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px; transition: 0.3s; }
-        .btn-connect:hover { background: #a78bfa; transform: scale(1.05); }
+        /* Home - Hero Section */
+        .hero-section { text-align: center; margin: 60px 0 40px 0; max-width: 750px; }
+        .hero-section h1 { 
+            font-size: 3.2rem; 
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 20px; 
+            line-height: 1.15;
+            background: linear-gradient(to bottom, #fff 40%, #c084fc); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        .hero-section p { color: var(--text-muted); font-size: 1.15rem; font-weight: 400; }
         
-        /* SEÇÃO DE CATEGORIAS DE JOGOS */
-        .categories-title { text-align: center; margin-top: 30px; font-size: 2rem; color: #fff; }
-        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 90%; max-width: 900px; margin: 30px 0; }
-        .category-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(139, 31, 245, 0.3); border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.3s ease; position: relative; text-align: center; }
-        .category-card:hover { border-color: #8b1ff5; transform: scale(1.03); box-shadow: 0 0 25px rgba(139, 31, 245, 0.4); }
-        .category-img { width: 100%; height: 240px; object-fit: cover; border-bottom: 2px solid rgba(139, 31, 245, 0.3); }
-        .category-name { padding: 15px; font-size: 1.4rem; font-weight: bold; color: #fff; background: rgba(15, 10, 28, 0.8); }
+        /* Features Grid */
+        .features-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
+            width: 100%; 
+            margin: 40px 0; 
+        }
 
-        /* LISTA DE PRODUTOS INDIVIDUAIS */
-        .products-container { display: none; flex-direction: column; align-items: center; width: 100%; animation: fadeIn 0.4s ease; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 30px; width: 90%; max-width: 1100px; margin: 20px 0; align-items: start; }
-        .card { background: rgba(0,0,0,0.5); border: 1px solid #8b1ff5; border-radius: 16px; padding: 30px; text-align: center; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.4s ease; display: flex; flex-direction: column; }
+        .info-card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border); 
+            border-radius: 16px; 
+            padding: 30px; 
+            backdrop-filter: blur(10px); 
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+
+        .info-card:hover { 
+            border-color: rgba(139, 31, 245, 0.4); 
+            background: rgba(139, 31, 245, 0.02);
+            transform: translateY(-4px); 
+            box-shadow: 0 12px 30px rgba(139,31,245,0.08); 
+        }
+
+        .info-card h3 { margin-bottom: 12px; font-size: 1.2rem; color: #fff; font-weight: 600; }
+        .info-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
         
-        /* Botões de Navegação Superior Interna */
-        .btn-back-categories { background: rgba(139, 31, 245, 0.15); color: #c084fc; border: 1px solid #8b1ff5; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-back-categories:hover { background: #8b1ff5; color: #fff; transform: translateY(-2px); }
-
-        /* Imagem do Cheat */
-        .product-img { width: 100%; height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 20px; border: 2px solid rgba(139, 31, 245, 0.5); }
-        .card h2 { margin-bottom: 15px; font-size: 1.8rem; }
+        /* Seção de Categorias de Jogos */
+        .categories-title { text-align: center; margin: 40px 0 20px 0; font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; }
         
-        .product-video { width: 100%; border-radius: 8px; border: 1px solid #8b1ff5; margin-bottom: 20px; background-color: #000; box-shadow: 0 0 10px rgba(139, 31, 245, 0.3); }
+        .categories-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+            width: 100%; 
+            margin-bottom: 50px; 
+        }
 
-        /* Contêiner do Fluxo de Compra Dinâmico */
-        .hidden-purchase-flow { display: none; margin-top: 20px; border-top: 1px solid rgba(139, 31, 245, 0.3); padding-top: 20px; animation: fadeIn 0.4s ease; position: relative; }
+        .category-card { 
+            background: var(--bg-secondary); 
+            border: 1px solid rgba(255,255,255,0.05); 
+            border-radius: 20px; 
+            overflow: hidden; 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
+            position: relative; 
+        }
+
+        .category-card:hover { 
+            border-color: var(--accent); 
+            transform: translateY(-4px); 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(139, 31, 245, 0.2); 
+        }
+
+        .category-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.5s ease; }
+        .category-card:hover .category-img { transform: scale(1.03); }
+        .category-name { padding: 20px; font-size: 1.25rem; font-weight: 700; color: #fff; background: var(--bg-secondary); text-align: center; border-top: 1px solid rgba(255,255,255,0.03); }
+
+        /* Contêiner de Produtos Individuais */
+        .products-container { display: none; flex-direction: column; align-items: center; width: 100%; }
         
-        /* Botão Minimizar Detalhes */
-        .btn-minimize { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); padding: 8px 16px; border-radius: 6px; font-size: 0.85rem; font-weight: bold; cursor: pointer; margin-bottom: 20px; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; }
-        .btn-minimize:hover { background: #ef4444; color: #fff; transform: translateY(-1px); }
+        .btn-back-categories { 
+            background: rgba(255,255,255,0.03); 
+            color: var(--text-muted); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            padding: 10px 20px; 
+            border-radius: 10px; 
+            font-weight: 600; 
+            font-size: 0.9rem;
+            cursor: pointer; 
+            margin: 30px 0; 
+            transition: all 0.2s; 
+            align-self: flex-start;
+        }
 
-        /* Seleção Dinâmica de Planos Estilizados */
-        .plans-container { display: flex; gap: 10px; margin: 15px 0 20px 0; justify-content: space-between; }
-        .plan-card { flex: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(139, 31, 245, 0.3); padding: 12px 8px; border-radius: 10px; cursor: pointer; text-align: center; transition: 0.2s; display: flex; flex-direction: column; gap: 4px; }
-        .plan-card:hover { border-color: #a78bfa; background: rgba(139, 31, 245, 0.08); }
-        .plan-card.selected { border-color: #c084fc; background: rgba(139, 31, 245, 0.25); box-shadow: 0 0 12px rgba(139,31,245,0.4); }
-        .plan-duration { font-size: 0.9rem; font-weight: bold; color: #fff; }
-        .plan-price-text { font-size: 0.85rem; color: #c084fc; font-weight: 500; }
+        .btn-back-categories:hover { background: rgba(255,255,255,0.08); color: #fff; }
 
-        .btn-price { background: #8b1ff5; color: #fff; border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1rem; transition: 0.3s; margin-bottom: 10px; }
-        .btn-price:hover { background: #9333ea; box-shadow: 0 0 15px #8b1ff5; }
+        .products-grid { display: flex; justify-content: center; width: 100%; margin-bottom: 50px; }
+        
+        /* Cartão de Produto Premium */
+        .card { 
+            background: var(--bg-secondary); 
+            border: 1px solid rgba(255,255,255,0.05); 
+            border-radius: 24px; 
+            padding: 35px; 
+            text-align: center; 
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
+        }
+        
+        .card h2 { margin-bottom: 20px; font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; }
+        .product-img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
+        .product-video { width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px; background-color: #000; }
 
-        .inner-features { text-align: left; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 10px; margin-top: 25px; border: 1px solid #3f3f46; }
-        .inner-features h3 { font-size: 1.1rem; color: #c084fc; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; }
-        .inner-features ul { list-style: none; font-size: 0.85rem; color: #d1d5db; margin-bottom: 15px; }
-        .inner-features ul li { margin-bottom: 5px; padding-left: 10px; position: relative; }
-        .inner-features ul li::before { content: "•"; color: #8b1ff5; position: absolute; left: 0; }
+        /* Fluxo de Compra Integrado */
+        .hidden-purchase-flow { display: none; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 25px; animation: fadeIn 0.3s ease; }
+        
+        .btn-minimize { 
+            background: rgba(239, 68, 68, 0.08); 
+            color: #ef4444; 
+            border: 1px solid rgba(239, 68, 68, 0.2); 
+            padding: 8px 16px; 
+            border-radius: 8px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            margin-bottom: 25px; 
+            transition: 0.2s; 
+        }
 
-        /* Modais */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-box { background: #0f0a1c; border: 2px solid #8b1ff5; border-radius: 20px; padding: 40px; width: 95%; max-width: 880px; position: relative; box-shadow: 0 0 30px rgba(139,31,245,0.4); }
-        .modal-split { display: flex; gap: 35px; align-items: center; }
-        .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; font-size: 24px; color: #a1a1aa; transition: 0.2s; }
+        .btn-minimize:hover { background: #ef4444; color: #fff; }
+
+        /* Grade de Planos Otimizada */
+        .plans-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 15px 0 25px 0; }
+        
+        .plan-card { 
+            background: rgba(255,255,255,0.02); 
+            border: 1px solid rgba(255,255,255,0.05); 
+            padding: 16px 10px; 
+            border-radius: 14px; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px; 
+        }
+
+        .plan-card:hover { border-color: rgba(139, 31, 245, 0.4); background: rgba(139, 31, 245, 0.03); }
+        
+        .plan-card.selected { 
+            border-color: var(--accent); 
+            background: rgba(139, 31, 245, 0.12); 
+            box-shadow: 0 0 15px rgba(139, 31, 245, 0.25); 
+        }
+
+        .plan-duration { font-size: 0.95rem; font-weight: 700; color: #fff; }
+        .plan-price-text { font-size: 0.9rem; color: #c084fc; font-weight: 600; }
+
+        .btn-price { 
+            background: var(--accent); 
+            color: #fff; 
+            border: none; 
+            padding: 15px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-weight: 700; 
+            font-size: 1rem; 
+            transition: all 0.2s; 
+            margin-bottom: 12px; 
+        }
+
+        .btn-price:hover { background: #9d3bf7; box-shadow: 0 0 20px var(--accent-glow); }
+
+        /* Lista de Recursos (Features) Interna */
+        .inner-features { text-align: left; background: rgba(0,0,0,0.2); padding: 25px; border-radius: 16px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.03); }
+        .inner-features h3 { font-size: 1.1rem; color: #fff; margin-bottom: 15px; font-weight: 700; }
+        .inner-features strong { font-size: 0.85rem; color: #c084fc; display: block; margin: 15px 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px; }
+        .inner-features strong:first-of-type { margin-top: 0; }
+        .inner-features ul { list-style: none; font-size: 0.9rem; color: var(--text-muted); }
+        .inner-features ul li { margin-bottom: 6px; padding-left: 18px; position: relative; }
+        .inner-features ul li::before { content: "✓"; color: var(--success); position: absolute; left: 0; font-weight: bold; }
+
+        /* Modais Básicos */
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(4, 2, 9, 0.9); 
+            backdrop-filter: blur(15px); 
+            z-index: 1000; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px;
+        }
+
+        .modal-box { 
+            background: var(--bg-secondary); 
+            border: 1px solid rgba(139, 31, 245, 0.3); 
+            border-radius: 24px; 
+            padding: 40px; 
+            width: 100%; 
+            max-width: 800px; 
+            position: relative; 
+            box-shadow: 0 30px 70px rgba(0,0,0,0.8), 0 0 50px rgba(139,31,245,0.15); 
+        }
+
+        .modal-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        
+        @media (max-width: 768px) {
+            .modal-split { grid-template-columns: 1fr; gap: 25px; }
+            .modal-box { padding: 30px 20px; max-width: 450px; }
+            .plans-container { gap: 8px; }
+        }
+
+        .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 20px; color: var(--text-muted); transition: 0.2s; }
         .close-modal:hover { color: #fff; }
 
-        /* ÁREA E FOTO DO QR CODE GIGANTE */
-        .pix-area { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 15px; background: rgba(255,255,255,0.04); padding: 25px; border-radius: 12px; border: 1px solid rgba(139, 31, 245, 0.3); }
-        .qrcode-img { width: 320px; height: 320px; border: 8px solid #fff; border-radius: 12px; }
-        .btn-copy { background: #22c55e; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.2s; width: 100%; max-width: 320px; }
-        .btn-copy:hover { background: #16a34a; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3); }
+        /* Área de Checkout PIX */
+        .pix-area { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 15px; 
+            margin-top: 20px; 
+            background: rgba(0,0,0,0.25); 
+            padding: 20px; 
+            border-radius: 16px; 
+            border: 1px solid rgba(255,255,255,0.03); 
+        }
+
+        .qrcode-img { width: 240px; height: 240px; border: 6px solid #fff; border-radius: 12px; }
         
-        /* Roleta */
-        .wheel-container { position: relative; width: 260px; height: 260px; margin: 20px auto; }
-        .wheel-pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid #fff; z-index: 10; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); }
+        .btn-copy { 
+            background: var(--success); 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 10px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 0.95rem; 
+            transition: 0.2s; 
+            width: 100%; 
+        }
+
+        .btn-copy:hover { 
+            background: #1ea750; 
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.2); 
+        }
+        
+        /* --- POPUP DA ROLETA PULSANTE --- */
+        .roleta-trigger-popup {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(13, 6, 31, 0.9);
+            border: 2px solid var(--accent);
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(139,31,245,0.3);
+            animation: pulseGlow 2s infinite ease-in-out;
+            transition: transform 0.2s ease;
+        }
+
+        .roleta-trigger-popup:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(139, 31, 245, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(139, 31, 245, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(139, 31, 245, 0); }
+        }
+
+        .roleta-trigger-popup span {
+            font-size: 1.3rem;
+        }
+        .roleta-trigger-popup p {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Roleta Estilizada Interna */
+        .wheel-container { position: relative; width: 280px; height: 280px; margin: 25px auto; }
+        .wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 24px solid #fff; z-index: 10; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
+        
         #wheel { 
             width: 100%; height: 100%; 
             border-radius: 50%; 
@@ -139,13 +437,50 @@
             background: conic-gradient(#ef4444 0deg 90deg, #f59e0b 90deg 180deg, #22c55e 180deg 270deg, #3b82f6 270deg 360deg); 
             transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
             position: relative;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .wheel-label { position: absolute; font-weight: bold; font-size: 0.9rem; color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
-        .wl-1 { top: 40px; right: 45px; transform: rotate(45deg); }
-        .wl-2 { bottom: 40px; right: 45px; transform: rotate(135deg); }
-        .wl-3 { bottom: 40px; left: 45px; transform: rotate(225deg); }
-        .wl-4 { top: 40px; left: 45px; transform: rotate(315deg); }
+
+        .wheel-label { position: absolute; font-weight: 800; font-size: 0.85rem; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        .wl-1 { top: 45px; right: 50px; transform: rotate(45deg); }
+        .wl-2 { bottom: 45px; right: 50px; transform: rotate(135deg); }
+        .wl-3 { bottom: 45px; left: 50px; transform: rotate(225deg); }
+        .wl-4 { top: 45px; left: 50px; transform: rotate(315deg); }
+
+        /* Botões de Verificação do Discord obrigatório */
+        .discord-verify-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px dashed rgba(88, 101, 242, 0.4);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        .discord-verify-box p {
+            font-size: 0.85rem;
+            color: #a1a1aa;
+            margin-bottom: 10px;
+        }
+        .btn-action-discord {
+            background: #5865F2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.2s;
+        }
+        .btn-action-discord:hover {
+            background: #4752c4;
+        }
+
+        /* Botão Girar Bloqueado por Padrão */
+        .btn-spin-disabled {
+            background: #3f3f46;
+            color: #71717a;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -157,47 +492,46 @@
         <div class="nav-links">
             <a onclick="mudarAba('inicio')" id="tab-inicio" class="active">Início</a>
             <a onclick="mudarAba('produtos')" id="tab-produtos">Produtos</a>
-            <a href="SEU_LINK_DO_DISCORD_AQUI" class="btn-nav discord" target="_blank">Discord</a>
+            <a href="https://discord.gg/PAWq8m5hv" class="btn-nav discord" target="_blank">Discord</a>
         </div>
     </nav>
 
     <div id="conteudo-inicio" class="tab-content active">
         <section class="hero-section">
             <h1>Sua Performance Elevada ao Máximo</h1>
-            <p>Seja bem-vindo à Oppus Shop. Oferecemos as melhores soluções do mercado com segurança impecável, otimização extrema e foco total na discrição do usuário.</p>
+            <p>Descubra o padrão elite da Oppus Shop. Desenvolvemos soluções com otimização avançada, estabilidade cirúrgica e total foco na segurança e discrição.</p>
         </section>
 
         <div class="features-grid">
             <div class="info-card">
                 <h3>⚡ Entrega Instantânea</h3>
-                <p>Assim que o seu pagamento via PIX for aprovado, o produto é liberado automaticamente em seu e-mail ou Discord.</p>
+                <p>O processamento via PIX é automatizado. O acesso e chaves do produto chegam imediatamente para você após aprovação.</p>
             </div>
             <div class="info-card">
                 <h3>🔒 Segurança Máxima</h3>
-                <p>Nossas ferramentas contam com sistemas de bypass avançados e atualizações diárias preventivas contra detecções.</p>
+                <p>Nossas estruturas contam com bypass dinâmico de última geração, passando por análises preventivas diárias.</p>
             </div>
             <div class="info-card">
-                <h3>🛠️ Suporte Dedicado</h3>
-                <p>Equipe pronta para te auxiliar na instalação, configuração e resposta de dúvidas diretamente em nossa central do Discord.</p>
+                <h3>🛠️ Suporte VIP</h3>
+                <p>Conte com uma equipe altamente capacitada pronta para te auxiliar na instalação e configuração direto em nosso Discord.</p>
             </div>
-        </div>
-
-        <div class="promo-banner">
-            <h3>🎡 Teste sua Sorte na Roleta Diária!</h3>
-            <p style="color: #a1a1aa; font-size: 0.9rem; margin-top: 5px;">Ganhe cupons exclusivos de desconto para usar em nossa loja hoje mesmo.</p>
-            <button class="btn-connect" onclick="abrirModal('roleta')">Girar Roleta</button>
         </div>
     </div>
 
     <div id="conteudo-produtos" class="tab-content">
         
         <div id="wrapper-categorias" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-            <h2 class="categories-title">Escolha um Jogo para Ver as Opções</h2>
+            <h2 class="categories-title">Selecione uma categoria para prosseguir</h2>
             
             <div class="categories-grid">
                 <div class="category-card" onclick="mostrarProdutosJogo('jogo-r6')">
                     <img src="r6.jpg" alt="Rainbow Six" class="category-img">
                     <div class="category-name">Rainbow Six Siege</div>
+                </div>
+
+                <div class="category-card" onclick="mostrarProdutosJogo('jogo-fortnite')">
+                    <img src="fortnite logo.jpg" alt="Fortnite" class="category-img">
+                    <div class="category-name">Fortnite</div>
                 </div>
 
                 <div class="category-card" onclick="mostrarProdutosJogo('jogo-dayz')">
@@ -208,7 +542,7 @@
         </div>
 
         <div id="jogo-r6" class="products-container">
-            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-r6')">⬅ Voltar para Categorias</button>
+            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-r6')">← Voltar para Categorias</button>
             
             <div class="products-grid">
                 <div class="card">
@@ -222,10 +556,9 @@
 
                         <video class="product-video" controls>
                             <source src="crusader_intro - Trim.mp4" type="video/mp4">
-                            Seu navegador não suporta a exibição de vídeos.
                         </video>
 
-                        <p style="color: #c084fc; font-weight: bold; font-size: 0.95rem;">Selecione o plano desejado:</p>
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         
                         <div class="plans-container">
                             <div class="plan-card selected" id="plan-r6-1" onclick="selecionarPlanoCard('r6', '1', '30.00', 'R6 Oppus Rage - 1 Dia', 'r6cheat rage.jpg')">
@@ -242,24 +575,80 @@
                             </div>
                         </div>
                         
-                        <button class="btn-price" onclick="abrirCompraDinamica('r6')" style="background: #22c55e;">Comprar Agora</button>
+                        <button class="btn-price" onclick="abrirCompraDinamica('r6')" style="background: var(--success);">Adquirir Agora</button>
 
                         <div class="inner-features">
                             <h3>📋 Recursos Oppus R6S</h3>
-                            <strong style="font-size:0.85rem; color:#fff; display:block; margin-bottom:5px;">Player ESP</strong>
+                            <strong>Visuals & ESP</strong>
                             <ul>
-                                <li>Players: Mostra alvos através de estruturas</li>
-                                <li>ESP Box / ESP Line (Topo, Centro, Base)</li>
-                                <li>Skeleton (Esqueletos) & Name (Nicknames)</li>
-                                <li>Head Hitbox & Health (Barra ou Texto HP)</li>
-                                <li>Team Check (Não puxa em aliados)</li>
+                                <li>Box ESP & Bone Skeleton completo</li>
+                                <li>Health Text / HP Bar dinâmico</li>
+                                <li>Head Hitbox indicator</li>
+                                <li>Filtro de Alinhamento (Team Check)</li>
                             </ul>
-                            <strong style="font-size:0.85rem; color:#fff; display:block; margin-bottom:5px;">Aimbot & Misc</strong>
+                            <strong>Combat Match</strong>
                             <ul>
-                                <li>Active Aimbot (Auxílio de mira customizável)</li>
-                                <li>Aimbot Keys (2 teclas configuráveis)</li>
-                                <li>FOV Size/Draw & Hitboxes (Ossos específicos)</li>
-                                <li>Crosshair Estática & Hit Damage Effect</li>
+                                <li>Aimbot Inteligente Ajustável</li>
+                                <li>Duas teclas rápidas de ativação (Keys)</li>
+                                <li>Fov Circle customizável no monitor</li>
+                                <li>Sem Recuo indesejado nas armas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="jogo-fortnite" class="products-container">
+            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-fortnite')">← Voltar para Categorias</button>
+            
+            <div class="products-grid">
+                <div class="card">
+                    <img src="fortnite logo.jpg" alt="Fortnite Oppus Elite" class="product-img">
+                    <h2>Fortnite Oppus Elite</h2>
+                    
+                    <button id="btnFortnite" class="btn-price" onclick="revelarFluxo('fluxoFortnite', 'btnFortnite')">Ver Planos e Recursos</button>
+                    
+                    <div id="fluxoFortnite" class="hidden-purchase-flow">
+                        <button class="btn-minimize" onclick="minimizarFluxo('fluxoFortnite', 'btnFortnite')">✕ Minimizar Detalhes</button>
+
+                        <video class="product-video" controls>
+                            <source src="fortnite_intro.mp4" type="video/mp4">
+                        </video>
+
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
+                        
+                        <div class="plans-container">
+                            <div class="plan-card selected" id="plan-fortnite-1" onclick="selecionarPlanoCard('fortnite', '1', '29.99', 'Fortnite Oppus Elite - 1 Dia', 'fortnite logo.jpg')">
+                                <span class="plan-duration">1 Dia</span>
+                                <span class="plan-price-text">R$ 29,99</span>
+                            </div>
+                            <div class="plan-card" id="plan-fortnite-7" onclick="selecionarPlanoCard('fortnite', '7', '130.00', 'Fortnite Oppus Elite - 7 Dias', 'fortnite logo.jpg')">
+                                <span class="plan-duration">7 Dias</span>
+                                <span class="plan-price-text">R$ 130,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-fortnite-30" onclick="selecionarPlanoCard('fortnite', '30', '275.00', 'Fortnite Oppus Elite - 30 Dias', 'fortnite logo.jpg')">
+                                <span class="plan-duration">30 Dias</span>
+                                <span class="plan-price-text">R$ 275,00</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-price" onclick="abrirCompraDinamica('fortnite')" style="background: var(--success);">Adquirir Agora</button>
+
+                        <div class="inner-features">
+                            <h3>📋 Recursos Oppus Fortnite</h3>
+                            <strong>Visuals & ESP</strong>
+                            <ul>
+                                <li>Player ESP (Caixas 2D/3D & Linhas de proximidade)</li>
+                                <li>Distância exata em tempo real & Shield Tracker</li>
+                                <li>Loot & Chest ESP avançado (Filtros por raridade)</li>
+                            </ul>
+                            <strong>Combat Engine</strong>
+                            <ul>
+                                <li>Memory Aimbot de alta performance com predição</li>
+                                <li>Círculo de FOV customizável por cores e dimensões</li>
+                                <li>Armas estáveis (No Recoil & No Spread habilitados)</li>
+                                <li>Mecanismo de proteção bypass anti-cheat ativo</li>
                             </ul>
                         </div>
                     </div>
@@ -268,7 +657,7 @@
         </div>
 
         <div id="jogo-dayz" class="products-container">
-            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-dayz')">⬅ Voltar para Categorias</button>
+            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-dayz')">← Voltar para Categorias</button>
             
             <div class="products-grid">
                 <div class="card">
@@ -282,10 +671,9 @@
 
                         <video class="product-video" controls>
                             <source src="DayZAuthority - Trim.mp4" type="video/mp4">
-                            Seu navegador não suporta a exibição de vídeos.
                         </video>
 
-                        <p style="color: #c084fc; font-weight: bold; font-size: 0.95rem;">Selecione o plano desejado:</p>
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         
                         <div class="plans-container">
                             <div class="plan-card selected" id="plan-dayz-1" onclick="selecionarPlanoCard('dayz', '1', '30.00', 'DayZ Oppus Rage - 1 Dia', 'dayz cheat rage.png')">
@@ -302,24 +690,22 @@
                             </div>
                         </div>
                         
-                        <button class="btn-price" onclick="abrirCompraDinamica('dayz')" style="background: #22c55e;">Comprar Agora</button>
+                        <button class="btn-price" onclick="abrirCompraDinamica('dayz')" style="background: var(--success);">Adquirir Agora</button>
 
                         <div class="inner-features">
                             <h3>📋 Recursos Oppus DayZ</h3>
-                            <strong style="font-size:0.85rem; color:#fff; display:block; margin-bottom:5px;">Visuals & ESP</strong>
+                            <strong>Visual Filters</strong>
                             <ul>
-                                <li>Player ESP (Esqueleto, Caixa 2D/3D e Linhas)</li>
-                                <li>Zombie ESP (Filtragem e distância de infectados)</li>
-                                <li>Loot & Item ESP (Armas, Roupas, Comida e Medicina)</li>
-                                <li>Exibição de Distância e Itens nas Mãos do Alvo</li>
-                                <li>World ESP (Carros, Construções e Bases)</li>
+                                <li>Jogadores & Zumbis (Esqueleto e caixas táteis)</li>
+                                <li>Loot Avançado (Comida, Remédios, Armas e Roupas)</li>
+                                <li>Exibição detalhada de itens em mãos do alvo</li>
+                                <li>World ESP (Carros ativos, Peças e estruturas de Base)</li>
                             </ul>
-                            <strong style="font-size:0.85rem; color:#fff; display:block; margin-bottom:5px;">Aimbot & Exploit</strong>
+                            <strong>Exploits & Auxiliares</strong>
                             <ul>
-                                <li>Silent Aimbot com FOV Ajustável</li>
-                                <li>Alvo customizável (Cabeça, Pescoço, Corpo)</li>
-                                <li>Noclip Avançado (Atravessar superfícies e voar)</li>
-                                <li>Always Day (Sempre Dia no mapa)</li>
+                                <li>Silent Aimbot cirúrgico configurável por osso</li>
+                                <li>Noclip vertical/horizontal suave para superfícies</li>
+                                <li>Sempre Dia (Bypass de iluminação de servidores)</li>
                             </ul>
                         </div>
                     </div>
@@ -329,52 +715,68 @@
 
     </div>
 
+    <div class="roleta-trigger-popup" onclick="abrirModal('roleta')">
+        <span>🎡</span>
+        <p>Roleta Diária Disponível!</p>
+    </div>
+
     <div id="modalPagamento" class="modal-overlay">
         <div class="modal-box">
             <span class="close-modal" onclick="fecharModal('modalPagamento')">✕</span>
             <div class="modal-split">
-                <img id="modalProdutoImg" src="" style="width: 300px; background: white; padding: 10px; border-radius: 10px; object-fit: contain;">
-                <div style="flex: 1;">
-                    <h2 id="modalProdutoNome" style="margin-bottom:5px;">Produto</h2>
-                    <div id="modalProdutoValor" style="font-size: 2.2rem; color: #8b1ff5; font-weight: bold; margin-bottom: 10px;">R$ 0,00</div>
-                    <p style="margin-bottom: 10px; color: #a1a1aa; font-size: 0.9rem;">Escaneie o QR Code abaixo ou utilize o PIX Copia e Cola:</p>
+                <div style="display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 16px;">
+                    <img id="modalProdutoImg" src="" style="width: 100%; max-height: 250px; object-fit: contain; border-radius: 8px;">
+                </div>
+                <div>
+                    <h2 id="modalProdutoNome" style="font-size: 1.5rem; font-weight: 700; margin-bottom: 5px;">Produto</h2>
+                    <div id="modalProdutoValor" style="font-size: 2.2rem; color: var(--accent); font-weight: 800; margin-bottom: 12px;">R$ 0,00</div>
+                    <p style="margin-bottom: 15px; color: var(--text-muted); font-size: 0.9rem;">Realize o escaneamento do código ou utilize o copia e cola para concluir o pagamento.</p>
                     
                     <div class="pix-area">
                         <img class="qrcode-img" src="qrcode.png" alt="QR Code PIX">
                         <button class="btn-copy" onclick="copiarChavePix()">📋 Copiar Chave PIX</button>
                     </div>
 
-                    <a href="https://discord.gg/PAWq8m5hv" class="btn-nav discord" target="_blank" style="display:inline-block; padding: 12px 25px; margin-top: 15px; width: 100%; text-align: center;">Suporte no Discord</a>
+                    <a href="https://discord.gg/PAWq8m5hv" class="btn-nav discord" target="_blank" style="display: block; padding: 12px 20px; margin-top: 20px; text-align: center; border-radius: 10px; text-decoration: none;">Abrir Ticket de Suporte</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div id="modalRoleta" class="modal-overlay">
-        <div class="modal-box" style="text-align: center; max-width: 420px;">
+        <div class="modal-box" style="text-align: center; max-width: 440px;">
             <span class="close-modal" onclick="fecharModal('modalRoleta')">✕</span>
-            <h2>🎡 Roleta da Sorte</h2>
-            <p style="color: #a1a1aa; font-size: 0.85rem; margin-top: 5px;">Gire para conquistar seu cupom diário!</p>
+            <h2 style="font-weight: 800; font-size: 1.8rem;">🎡 Roleta de Prêmios</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Complete a ação obrigatória para liberar o seu giro.</p>
             
             <div class="wheel-container">
                 <div class="wheel-pointer"></div>
                 <div id="wheel">
-                    <div class="wheel-label wl-1">5% OFF</div>
-                    <div class="wheel-label wl-2">10% OFF</div>
-                    <div class="wheel-label wl-3">3% OFF</div>
-                    <div class="wheel-label wl-4">15% OFF</div>
+                    <div class="wheel-label wl-1">15% OFF</div>
+                    <div class="wheel-label wl-2">3% OFF</div>
+                    <div class="wheel-label wl-3">10% OFF</div>
+                    <div class="wheel-label wl-4">5% OFF</div>
                 </div>
             </div>
+
+            <div class="discord-verify-box" id="boxVerificacao">
+                <p>⚠️ Você deve entrar no nosso servidor oficial do Discord para poder girar a roleta.</p>
+                <button class="btn-action-discord" onclick="registrarCliqueDiscord()">1. Entrar no Discord</button>
+            </div>
             
-            <button class="btn-price" onclick="giraRoleta()">Girar!</button>
+            <button id="btnGirarRoleta" class="btn-price btn-spin-disabled" onclick="giraRoleta()" disabled>2. Girar Agora</button>
         </div>
     </div>
 
     <script>
         const dadosPlanos = {
             r6: { valor: "30.00", nome: "R6 Oppus Rage - 1 Dia", img: "r6cheat rage.jpg" },
+            fortnite: { valor: "29.99", nome: "Fortnite Oppus Elite - 1 Dia", img: "fortnite logo.jpg" },
             dayz: { valor: "30.00", nome: "DayZ Oppus Rage - 1 Dia", img: "dayz cheat rage.png" }
         };
+
+        let clicouNoDiscord = false;
+        let jaGirou = false;
 
         function mudarAba(aba) {
             document.getElementById('conteudo-inicio').classList.remove('active');
@@ -391,8 +793,24 @@
                 
                 document.getElementById('wrapper-categorias').style.display = 'flex';
                 document.getElementById('jogo-r6').style.display = 'none';
+                document.getElementById('jogo-fortnite').style.display = 'none';
                 document.getElementById('jogo-dayz').style.display = 'none';
             }
+        }
+
+        function registrarCliqueDiscord() {
+            // Abre o convite do seu servidor
+            window.open("https://discord.gg/PAWq8m5hv", "_blank");
+            
+            clicouNoDiscord = true;
+            
+            // Altera visualmente o botão de giro para desbloqueado
+            const btnGirar = document.getElementById('btnGirarRoleta');
+            btnGirar.removeAttribute('disabled');
+            btnGirar.classList.remove('btn-spin-disabled');
+            
+            // Oculta a mensagem de aviso obrigatório
+            document.getElementById('boxVerificacao').style.display = 'none';
         }
 
         function mostrarProdutosJogo(idJogo) {
@@ -439,8 +857,11 @@
             alert("Chave PIX Copia e Cola copiada com sucesso!");
         }
 
-        let jaGirou = false;
         function giraRoleta() {
+            if(!clicouNoDiscord) {
+                alert("Você precisa clicar em 'Entrar no Discord' primeiro!");
+                return;
+            }
             if(jaGirou) {
                 alert("Você já realizou o seu giro diário!");
                 return;
@@ -455,10 +876,10 @@
                 const anguloFinal = grausAleatorios % 360;
                 let premio = "";
                 
-                if(anguloFinal >= 0 && anguloFinal < 90) premio = "15% OFF";
-                else if(anguloFinal >= 90 && anguloFinal < 180) premio = "3% OFF";
-                else if(anguloFinal >= 180 && anguloFinal < 270) premio = "10% OFF";
-                else premio = "5% OFF";
+                if(anguloFinal >= 0 && anguloFinal < 90) premio = "5% OFF";
+                else if(anguloFinal >= 90 && anguloFinal < 180) premio = "10% OFF";
+                else if(anguloFinal >= 180 && anguloFinal < 270) premio = "3% OFF";
+                else premio = "15% OFF";
                 
                 alert(`🎉 Parabéns! Você ganhou um cupom de ${premio}. Abra um ticket no Discord para resgatar!`);
             }, 4000);
