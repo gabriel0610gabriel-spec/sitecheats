@@ -187,7 +187,7 @@
         
         .categories-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
             gap: 25px; 
             width: 100%; 
             margin-bottom: 50px; 
@@ -232,7 +232,7 @@
 
         .btn-back-categories:hover { background: rgba(255,255,255,0.08); color: #fff; }
 
-        .products-grid { display: flex; justify-content: center; width: 100%; margin-bottom: 50px; }
+        .products-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; margin-bottom: 50px; }
         
         /* Cartão de Produto Premium */
         .card { 
@@ -270,6 +270,7 @@
 
         /* Grade de Planos Otimizada */
         .plans-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 15px 0 25px 0; }
+        .plans-container.single-plan { grid-template-columns: 1fr; max-width: 200px; margin: 15px auto 25px auto; }
         
         .plan-card { 
             background: rgba(255,255,255,0.02); 
@@ -538,6 +539,16 @@
                     <img src="dayZ.jpg" alt="DayZ" class="category-img">
                     <div class="category-name">DayZ</div>
                 </div>
+
+                <div class="category-card" onclick="mostrarProdutosJogo('jogo-cs2')">
+                    <img src="cs2 logo.png" alt="Counter Strike 2" class="category-img">
+                    <div class="category-name">Counter-Strike 2</div>
+                </div>
+
+                <div class="category-card" onclick="mostrarProdutosJogo('jogo-spoofers')">
+                    <img src="spoffer oppus.png" alt="Spoofers" class="category-img">
+                    <div class="category-name">Spoofers</div>
+                </div>
             </div>
         </div>
 
@@ -553,10 +564,6 @@
                     
                     <div id="fluxoR6" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoR6', 'btnR6')">✕ Minimizar Detalhes</button>
-
-                        <video class="product-video" controls>
-                            <source src="crusader_intro - Trim.mp4" type="video/mp4">
-                        </video>
 
                         <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         
@@ -612,10 +619,6 @@
                     <div id="fluxoFortnite" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoFortnite', 'btnFortnite')">✕ Minimizar Detalhes</button>
 
-                        <video class="product-video" controls>
-                            <source src="fortnite_intro.mp4" type="video/mp4">
-                        </video>
-
                         <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         
                         <div class="plans-container">
@@ -669,10 +672,6 @@
                     <div id="fluxoDayZ" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoDayZ', 'btnDayZ')">✕ Minimizar Detalhes</button>
 
-                        <video class="product-video" controls>
-                            <source src="DayZAuthority - Trim.mp4" type="video/mp4">
-                        </video>
-
                         <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         
                         <div class="plans-container">
@@ -713,6 +712,139 @@
             </div>
         </div>
 
+        <div id="jogo-cs2" class="products-container">
+            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-cs2')">← Voltar para Categorias</button>
+            
+            <div class="products-grid">
+                <div class="card">
+                    <img src="cs2 logo.png" alt="CS2 Oppus Internal" class="product-img">
+                    <h2>CS2 Oppus Internal</h2>
+                    
+                    <button id="btnCS2" class="btn-price" onclick="revelarFluxo('fluxoCS2', 'btnCS2')">Ver Planos e Recursos</button>
+                    
+                    <div id="fluxoCS2" class="hidden-purchase-flow">
+                        <button class="btn-minimize" onclick="minimizarFluxo('fluxoCS2', 'btnCS2')">✕ Minimizar Detalhes</button>
+
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
+                        
+                        <div class="plans-container">
+                            <div class="plan-card selected" id="plan-cs2-1" onclick="selecionarPlanoCard('cs2', '1', '25.00', 'CS2 Oppus Internal - 1 Dia', 'cs2 logo.png')">
+                                <span class="plan-duration">1 Dia</span>
+                                <span class="plan-price-text">R$ 25,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-cs2-7" onclick="selecionarPlanoCard('cs2', '7', '110.00', 'CS2 Oppus Internal - 7 Dias', 'cs2 logo.png')">
+                                <span class="plan-duration">7 Dias</span>
+                                <span class="plan-price-text">R$ 110,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-cs2-30" onclick="selecionarPlanoCard('cs2', '30', '240.00', 'CS2 Oppus Internal - 30 Dias', 'cs2 logo.png')">
+                                <span class="plan-duration">30 Dias</span>
+                                <span class="plan-price-text">R$ 240,00</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-price" onclick="abrirCompraDinamica('cs2')" style="background: var(--success);">Adquirir Agora</button>
+
+                        <div class="inner-features">
+                            <h3>📋 Recursos Oppus CS2</h3>
+                            <strong>Visuals & Overlay</strong>
+                            <ul>
+                                <li>Glow ESP & Chams texturizados (Visível/Invisível)</li>
+                                <li>Bone Skeleton 3D & Box delimitador</li>
+                                <li>Informações de Armas, Colete e HP dos adversários</li>
+                                <li>Radar 2D Interno customizável no display</li>
+                            </ul>
+                            <strong>Legit & Rage Combat</strong>
+                            <ul>
+                                <li>Aimbot Inteligente com ajuste de Smooth & Fov perfeito</li>
+                                <li>Triggerbot ultra veloz com delay configurável in ms</li>
+                                <li>Recoil Control System (RCS) standalone ajustável</li>
+                                <li>Proteção anti-cheat de memória reforçada (Bypass)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="jogo-spoofers" class="products-container">
+            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-spoofers')">← Voltar para Categorias</button>
+            
+            <div class="products-grid">
+                <div class="card">
+                    <img src="spoffer oppus.png" alt="Oppus Spoofer" class="product-img">
+                    <h2>Oppus Spoofer</h2>
+                    
+                    <button id="btnSpoofer" class="btn-price" onclick="revelarFluxo('fluxoSpoofer', 'btnSpoofer')">Ver Planos e Recursos</button>
+                    
+                    <div id="fluxoSpoofer" class="hidden-purchase-flow">
+                        <button class="btn-minimize" onclick="minimizarFluxo('fluxoSpoofer', 'btnSpoofer')">✕ Minimizar Detalhes</button>
+
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
+                        
+                        <div class="plans-container">
+                            <div class="plan-card selected" id="plan-spoofer-1" onclick="selecionarPlanoCard('spoofer', '1', '15.00', 'Oppus Spoofer - 1 Dia', 'spoffer oppus.png')">
+                                <span class="plan-duration">1 Dia</span>
+                                <span class="plan-price-text">R$ 15,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-spoofer-7" onclick="selecionarPlanoCard('spoofer', '7', '75.00', 'Oppus Spoofer - 7 Dias', 'spoffer oppus.png')">
+                                <span class="plan-duration">7 Dias</span>
+                                <span class="plan-price-text">R$ 75,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-spoofer-30" onclick="selecionarPlanoCard('spoofer', '30', '99.99', 'Oppus Spoofer - 30 Dias', 'spoffer oppus.png')">
+                                <span class="plan-duration">30 Dias</span>
+                                <span class="plan-price-text">R$ 99,99</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-price" onclick="abrirCompraDinamica('spoofer')" style="background: var(--success);">Adquirir Agora</button>
+
+                        <div class="inner-features">
+                            <h3>📋 Recursos Oppus Spoofer</h3>
+                            <strong>Proteção de Hardware</strong>
+                            <ul>
+                                <li>Limpeza profunda de registros de rastreamento antigos</li>
+                                <li>Modificação dinâmica de HWID (Disk, Motherboard, GPU)</li>
+                                <li>Bypass preventivo e atualizações constantes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="spoofer perma.png" alt="Oppus Spoofer perm unban" class="product-img">
+                    <h2>Oppus Spoofer perm unban</h2>
+                    
+                    <button id="btnSpooferPerm" class="btn-price" onclick="revelarFluxo('fluxoSpooferPerm', 'btnSpooferPerm')">Ver Planos e Recursos</button>
+                    
+                    <div id="fluxoSpooferPerm" class="hidden-purchase-flow">
+                        <button class="btn-minimize" onclick="minimizarFluxo('fluxoSpooferPerm', 'btnSpooferPerm')">✕ Minimizar Detalhes</button>
+
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
+                        
+                        <div class="plans-container single-plan">
+                            <div class="plan-card selected" id="plan-spooferperm-1" onclick="selecionarPlanoCard('spooferperm', '1', '149.99', 'Oppus Spoofer perm unban - Vitalício', 'spoofer perma.png')">
+                                <span class="plan-duration">Vitalício</span>
+                                <span class="plan-price-text">R$ 149,99</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-price" onclick="abrirCompraDinamica('spooferperm')" style="background: var(--success);">Adquirir Agora</button>
+
+                        <div class="inner-features">
+                            <h3>📋 Recursos Perm Unban</h3>
+                            <strong>Remoção Permanente</strong>
+                            <ul>
+                                <li>Acesso Vitalício ilimitado com suporte prioritário</li>
+                                <li>Remoção definitiva de shadowbans e restrições persistentes</li>
+                                <li>Otimização avançada de rede e alteração de MAC Spoofing</li>
+                                <li>Compatibilidade estendida com múltiplos sistemas operacionais</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="roleta-trigger-popup" onclick="abrirModal('roleta')">
@@ -730,59 +862,32 @@
                 <div>
                     <h2 id="modalProdutoNome" style="font-size: 1.5rem; font-weight: 700; margin-bottom: 5px;">Produto</h2>
                     <div id="modalProdutoValor" style="font-size: 2.2rem; color: var(--accent); font-weight: 800; margin-bottom: 12px;">R$ 0,00</div>
-                    <p style="margin-bottom: 15px; color: var(--text-muted); font-size: 0.9rem;">Realize o escaneamento do código ou utilize o copia e cola para concluir o pagamento.</p>
                     
                     <div class="pix-area">
-                        <img class="qrcode-img" src="qrcode.png" alt="QR Code PIX">
-                        <button class="btn-copy" onclick="copiarChavePix()">📋 Copiar Chave PIX</button>
+                        <div style="background: white; padding: 10px; border-radius: 8px;">
+                            <div style="width: 200px; height: 200px; background: #222; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8rem; text-align: center;">QR CODE AUTOMÁTICO SIMULADO</div>
+                        </div>
+                        <button class="btn-copy" onclick="alert('Código PIX Copiado com Sucesso!')">Copiar Código Copia e Cola</button>
                     </div>
-
-                    <a href="https://discord.gg/PAWq8m5hv" class="btn-nav discord" target="_blank" style="display: block; padding: 12px 20px; margin-top: 20px; text-align: center; border-radius: 10px; text-decoration: none;">Abrir Ticket de Suporte</a>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="modalRoleta" class="modal-overlay">
-        <div class="modal-box" style="text-align: center; max-width: 440px;">
-            <span class="close-modal" onclick="fecharModal('modalRoleta')">✕</span>
-            <h2 style="font-weight: 800; font-size: 1.8rem;">🎡 Roleta de Prêmios</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Complete a ação obrigatória para liberar o seu giro.</p>
-            
-            <div class="wheel-container">
-                <div class="wheel-pointer"></div>
-                <div id="wheel">
-                    <div class="wheel-label wl-1">15% OFF</div>
-                    <div class="wheel-label wl-2">3% OFF</div>
-                    <div class="wheel-label wl-3">10% OFF</div>
-                    <div class="wheel-label wl-4">5% OFF</div>
-                </div>
-            </div>
-
-            <div class="discord-verify-box" id="boxVerificacao">
-                <p>⚠️ Você deve entrar no nosso servidor oficial do Discord para poder girar a roleta.</p>
-                <button class="btn-action-discord" onclick="registrarCliqueDiscord()">1. Entrar no Discord</button>
-            </div>
-            
-            <button id="btnGirarRoleta" class="btn-price btn-spin-disabled" onclick="giraRoleta()" disabled>2. Girar Agora</button>
         </div>
     </div>
 
     <script>
-        const dadosPlanos = {
-            r6: { valor: "30.00", nome: "R6 Oppus Rage - 1 Dia", img: "r6cheat rage.jpg" },
-            fortnite: { valor: "29.99", nome: "Fortnite Oppus Elite - 1 Dia", img: "fortnite logo.jpg" },
-            dayz: { valor: "30.00", nome: "DayZ Oppus Rage - 1 Dia", img: "dayz cheat rage.png" }
+        // Estrutura para salvar o plano ativo selecionado de cada produto
+        let planosSelecionados = {
+            r6: { nome: 'R6 Oppus Rage - 1 Dia', preco: '30.00', img: 'r6cheat rage.jpg' },
+            fortnite: { nome: 'Fortnite Oppus Elite - 1 Dia', preco: '29.99', img: 'fortnite logo.jpg' },
+            dayz: { nome: 'DayZ Oppus Rage - 1 Dia', preco: '30.00', img: 'dayz cheat rage.png' },
+            cs2: { nome: 'CS2 Oppus Internal - 1 Dia', preco: '25.00', img: 'cs2 logo.png' },
+            spoofer: { nome: 'Oppus Spoofer - 1 Dia', preco: '15.00', img: 'spoffer oppus.png' },
+            spooferperm: { nome: 'Oppus Spoofer perm unban - Vitalício', preco: '149.99', img: 'spoofer perma.png' }
         };
 
-        let clicouNoDiscord = false;
-        let jaGirou = false;
-
         function mudarAba(aba) {
-            document.getElementById('conteudo-inicio').classList.remove('active');
-            document.getElementById('conteudo-produtos').classList.remove('active');
-            document.getElementById('tab-inicio').classList.remove('active');
-            document.getElementById('tab-produtos').classList.remove('active');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
             
             if(aba === 'inicio') {
                 document.getElementById('conteudo-inicio').classList.add('active');
@@ -790,31 +895,13 @@
             } else if(aba === 'produtos') {
                 document.getElementById('conteudo-produtos').classList.add('active');
                 document.getElementById('tab-produtos').classList.add('active');
-                
-                document.getElementById('wrapper-categorias').style.display = 'flex';
-                document.getElementById('jogo-r6').style.display = 'none';
-                document.getElementById('jogo-fortnite').style.display = 'none';
-                document.getElementById('jogo-dayz').style.display = 'none';
+                voltarParaCategoriasCompleto();
             }
-        }
-
-        function registrarCliqueDiscord() {
-            // Abre o convite do seu servidor
-            window.open("https://discord.gg/PAWq8m5hv", "_blank");
-            
-            clicouNoDiscord = true;
-            
-            // Altera visualmente o botão de giro para desbloqueado
-            const btnGirar = document.getElementById('btnGirarRoleta');
-            btnGirar.removeAttribute('disabled');
-            btnGirar.classList.remove('btn-spin-disabled');
-            
-            // Oculta a mensagem de aviso obrigatório
-            document.getElementById('boxVerificacao').style.display = 'none';
         }
 
         function mostrarProdutosJogo(idJogo) {
             document.getElementById('wrapper-categorias').style.display = 'none';
+            document.querySelectorAll('.products-container').forEach(el => el.style.display = 'none');
             document.getElementById(idJogo).style.display = 'flex';
         }
 
@@ -823,9 +910,14 @@
             document.getElementById('wrapper-categorias').style.display = 'flex';
         }
 
+        function voltarParaCategoriasCompleto() {
+            document.querySelectorAll('.products-container').forEach(el => el.style.display = 'none');
+            document.getElementById('wrapper-categorias').style.display = 'flex';
+        }
+
         function revelarFluxo(idFluxo, idBotao) {
-            document.getElementById(idBotao).style.display = 'none';
             document.getElementById(idFluxo).style.display = 'block';
+            document.getElementById(idBotao).style.display = 'none';
         }
 
         function minimizarFluxo(idFluxo, idBotao) {
@@ -833,64 +925,39 @@
             document.getElementById(idBotao).style.display = 'block';
         }
 
-        function selecionarPlanoCard(produto, dias, valor, nome, img) {
-            const cards = document.querySelectorAll(`[id^="plan-${produto}-"]`);
-            cards.forEach(card => card.classList.remove('selected'));
+        function selecionarPlanoCard(produto, dias, preco, nomePlano, imgPlano) {
+            // Remove a seleção visual dos outros cards do mesmo produto
+            document.querySelectorAll(`[id^="plan-${produto}-"]`).forEach(el => el.classList.remove('selected'));
             
-            document.getElementById(`plan-${produto}-${dias}`).classList.add('selected');
-            dadosPlanos[produto] = { valor, nome, img };
+            // Adiciona a seleção no card clicado
+            const cardClicado = document.getElementById(`plan-${produto}-${dias}`);
+            if(cardClicado) cardClicado.classList.add('selected');
+
+            // Atualiza os dados no objeto principal
+            planosSelecionados[produto] = {
+                nome: nomePlano,
+                preco: preco,
+                img: imgPlano
+            };
         }
 
         function abrirCompraDinamica(produto) {
-            const planoEscolhido = dadosPlanos[produto];
-            
-            document.getElementById('modalProdutoNome').textContent = planoEscolhido.nome;
-            document.getElementById('modalProdutoValor').textContent = "R$ " + planoEscolhido.valor;
-            document.getElementById('modalProdutoImg').src = planoEscolhido.img;
+            const dados = planosSelecionados[produto];
+            document.getElementById('modalProdutoNome').innerText = dados.nome;
+            document.getElementById('modalProdutoValor').innerText = 'R$ ' + dados.preco.replace('.', ',');
+            document.getElementById('modalProdutoImg').src = dados.img;
             
             document.getElementById('modalPagamento').style.display = 'flex';
         }
 
-        function copiarChavePix() {
-            const chaveFicticia = "73277f27-666c-4ed4-9077-47e302a5f786";
-            navigator.clipboard.writeText(chaveFicticia);
-            alert("Chave PIX Copia e Cola copiada com sucesso!");
-        }
-
-        function giraRoleta() {
-            if(!clicouNoDiscord) {
-                alert("Você precisa clicar em 'Entrar no Discord' primeiro!");
-                return;
-            }
-            if(jaGirou) {
-                alert("Você já realizou o seu giro diário!");
-                return;
-            }
-            jaGirou = true;
-            
-            const roda = document.getElementById('wheel');
-            const grausAleatorios = Math.floor(Math.random() * 360) + 1800; 
-            roda.style.transform = `rotate(${grausAleatorios}deg)`;
-            
-            setTimeout(() => {
-                const anguloFinal = grausAleatorios % 360;
-                let premio = "";
-                
-                if(anguloFinal >= 0 && anguloFinal < 90) premio = "5% OFF";
-                else if(anguloFinal >= 90 && anguloFinal < 180) premio = "10% OFF";
-                else if(anguloFinal >= 180 && anguloFinal < 270) premio = "3% OFF";
-                else premio = "15% OFF";
-                
-                alert(`🎉 Parabéns! Você ganhou um cupom de ${premio}. Abra um ticket no Discord para resgatar!`);
-            }, 4000);
-        }
-
         function abrirModal(tipo) {
-            if(tipo === 'roleta') document.getElementById('modalRoleta').style.display = 'flex';
+            if(tipo === 'roleta') {
+                alert('Roleta Diária: Entre em nosso Discord para validar seus giros promocionais gratuitos e coletar keys!');
+            }
         }
-        
-        function fecharModal(id) { 
-            document.getElementById(id).style.display = 'none'; 
+
+        function fecharModal(idModal) {
+            document.getElementById(idModal).style.display = 'none';
         }
     </script>
 </body>
