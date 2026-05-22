@@ -187,7 +187,7 @@
         
         .categories-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
             gap: 25px; 
             width: 100%; 
             margin-bottom: 50px; 
@@ -211,7 +211,7 @@
 
         .category-img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.5s ease; }
         .category-card:hover .category-img { transform: scale(1.03); }
-        .category-name { padding: 20px; font-size: 1.25rem; font-weight: 700; color: #fff; background: var(--bg-secondary); text-align: center; border-top: 1px solid rgba(255,255,255,0.03); }
+        .category-name { padding: 20px; font-size: 1.15rem; font-weight: 700; color: #fff; background: var(--bg-secondary); text-align: center; border-top: 1px solid rgba(255,255,255,0.03); }
 
         /* Contêiner de Produtos Individuais */
         .products-container { display: none; flex-direction: column; align-items: center; width: 100%; }
@@ -246,7 +246,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.4); 
         }
         
-        .card h2 { margin-bottom: 20px; font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; }
+        .card h2 { margin-bottom: 20px; font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; }
         .product-img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
         .product-video { width: 100%; display: block; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px; background-color: #000; }
 
@@ -371,8 +371,6 @@
             border-radius: 16px; 
             border: 1px solid rgba(255,255,255,0.03); 
         }
-
-        .qrcode-img { width: 240px; height: 240px; border: 6px solid #fff; border-radius: 12px; }
         
         .btn-copy { 
             background: var(--success); 
@@ -392,7 +390,7 @@
             box-shadow: 0 5px 15px rgba(34, 197, 94, 0.2); 
         }
         
-        /* --- POPUP DA ROLETA PULSANTE --- */
+        /* Popup da Roleta */
         .roleta-trigger-popup {
             position: fixed;
             bottom: 30px;
@@ -412,9 +410,7 @@
             transition: transform 0.2s ease;
         }
 
-        .roleta-trigger-popup:hover {
-            transform: scale(1.05);
-        }
+        .roleta-trigger-popup:hover { transform: scale(1.05); }
 
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 0 0 rgba(139, 31, 245, 0.7); }
@@ -422,70 +418,8 @@
             100% { box-shadow: 0 0 0 0 rgba(139, 31, 245, 0); }
         }
 
-        .roleta-trigger-popup span {
-            font-size: 1.3rem;
-        }
-        .roleta-trigger-popup p {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        /* Roleta Estilizada Interna */
-        .wheel-container { position: relative; width: 280px; height: 280px; margin: 25px auto; }
-        .wheel-pointer { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 24px solid #fff; z-index: 10; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
-        
-        #wheel { 
-            width: 100%; height: 100%; 
-            border-radius: 50%; 
-            border: 6px solid #fff; 
-            background: conic-gradient(#ef4444 0deg 90deg, #f59e0b 90deg 180deg, #22c55e 180deg 270deg, #3b82f6 270deg 360deg); 
-            transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1);
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .wheel-label { position: absolute; font-weight: 800; font-size: 0.85rem; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-        .wl-1 { top: 45px; right: 50px; transform: rotate(45deg); }
-        .wl-2 { bottom: 45px; right: 50px; transform: rotate(135deg); }
-        .wl-3 { bottom: 45px; left: 50px; transform: rotate(225deg); }
-        .wl-4 { top: 45px; left: 50px; transform: rotate(315deg); }
-
-        /* Botões de Verificação do Discord obrigatório */
-        .discord-verify-box {
-            background: rgba(255,255,255,0.02);
-            border: 1px dashed rgba(88, 101, 242, 0.4);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-        .discord-verify-box p {
-            font-size: 0.85rem;
-            color: #a1a1aa;
-            margin-bottom: 10px;
-        }
-        .btn-action-discord {
-            background: #5865F2;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            width: 100%;
-            transition: 0.2s;
-        }
-        .btn-action-discord:hover {
-            background: #4752c4;
-        }
-
-        /* Botão Girar Bloqueado por Padrão */
-        .btn-spin-disabled {
-            background: #3f3f46;
-            color: #71717a;
-            cursor: not-allowed;
-        }
+        .roleta-trigger-popup span { font-size: 1.3rem; }
+        .roleta-trigger-popup p { font-size: 0.9rem; font-weight: 700; color: #fff; }
     </style>
 </head>
 <body>
@@ -548,62 +482,38 @@
                     <img src="cs2 logo.png" alt="Counter Strike 2" class="category-img">
                     <div class="category-name">Counter-Strike 2</div>
                 </div>
+
+                <div class="category-card" onclick="mostrarProdutosJogo('jogo-spoofers')">
+                    <img src="spoffer oppus.png" alt="Spoofers" class="category-img">
+                    <div class="category-name">Spoofers</div>
+                </div>
             </div>
         </div>
 
         <div id="jogo-r6" class="products-container">
             <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-r6')">← Voltar para Categorias</button>
-            
             <div class="products-grid">
                 <div class="card">
                     <img src="r6cheat rage.jpg" alt="R6 Oppus Rage" class="product-img">
                     <h2>R6 Oppus Rage</h2>
-                    
                     <button id="btnR6" class="btn-price" onclick="revelarFluxo('fluxoR6', 'btnR6')">Ver Planos e Recursos</button>
                     
                     <div id="fluxoR6" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoR6', 'btnR6')">✕ Minimizar Detalhes</button>
-
-                        <video class="product-video" controls>
-                            <source src="crusader_intro - Trim.mp4" type="video/mp4">
-                        </video>
-
-                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
-                        
+                        <video class="product-video" controls><source src="crusader_intro - Trim.mp4" type="video/mp4"></video>
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         <div class="plans-container">
                             <div class="plan-card selected" id="plan-r6-1" onclick="selecionarPlanoCard('r6', '1', '30.00', 'R6 Oppus Rage - 1 Dia', 'r6cheat rage.jpg')">
-                                <span class="plan-duration">1 Dia</span>
-                                <span class="plan-price-text">R$ 30,00</span>
+                                <span class="plan-duration">1 Dia</span><span class="plan-price-text">R$ 30,00</span>
                             </div>
                             <div class="plan-card" id="plan-r6-7" onclick="selecionarPlanoCard('r6', '7', '140.00', 'R6 Oppus Rage - 7 Dias', 'r6cheat rage.jpg')">
-                                <span class="plan-duration">7 Dias</span>
-                                <span class="plan-price-text">R$ 140,00</span>
+                                <span class="plan-duration">7 Dias</span><span class="plan-price-text">R$ 140,00</span>
                             </div>
                             <div class="plan-card" id="plan-r6-30" onclick="selecionarPlanoCard('r6', '30', '300.00', 'R6 Oppus Rage - 30 Dias', 'r6cheat rage.jpg')">
-                                <span class="plan-duration">30 Dias</span>
-                                <span class="plan-price-text">R$ 300,00</span>
+                                <span class="plan-duration">30 Dias</span><span class="plan-price-text">R$ 300,00</span>
                             </div>
                         </div>
-                        
                         <button class="btn-price" onclick="abrirCompraDinamica('r6')" style="background: var(--success);">Adquirir Agora</button>
-
-                        <div class="inner-features">
-                            <h3>📋 Recursos Oppus R6S</h3>
-                            <strong>Visuals & ESP</strong>
-                            <ul>
-                                <li>Box ESP & Bone Skeleton completo</li>
-                                <li>Health Text / HP Bar dinâmico</li>
-                                <li>Head Hitbox indicator</li>
-                                <li>Filtro de Alinhamento (Team Check)</li>
-                            </ul>
-                            <strong>Combat Match</strong>
-                            <ul>
-                                <li>Aimbot Inteligente Ajustável</li>
-                                <li>Duas teclas rápidas de ativação (Keys)</li>
-                                <li>Fov Circle customizável no monitor</li>
-                                <li>Sem Recuo indesejado nas armas</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -611,56 +521,28 @@
 
         <div id="jogo-fortnite" class="products-container">
             <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-fortnite')">← Voltar para Categorias</button>
-            
             <div class="products-grid">
                 <div class="card">
                     <img src="fortnite logo.jpg" alt="Fortnite Oppus Elite" class="product-img">
                     <h2>Fortnite Oppus Elite</h2>
-                    
                     <button id="btnFortnite" class="btn-price" onclick="revelarFluxo('fluxoFortnite', 'btnFortnite')">Ver Planos e Recursos</button>
                     
                     <div id="fluxoFortnite" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoFortnite', 'btnFortnite')">✕ Minimizar Detalhes</button>
-
-                        <video class="product-video" controls>
-                            <source src="fortnite_intro.mp4" type="video/mp4">
-                        </video>
-
-                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
-                        
+                        <video class="product-video" controls><source src="fortnite_intro.mp4" type="video/mp4"></video>
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         <div class="plans-container">
                             <div class="plan-card selected" id="plan-fortnite-1" onclick="selecionarPlanoCard('fortnite', '1', '29.99', 'Fortnite Oppus Elite - 1 Dia', 'fortnite logo.jpg')">
-                                <span class="plan-duration">1 Dia</span>
-                                <span class="plan-price-text">R$ 29,99</span>
+                                <span class="plan-duration">1 Dia</span><span class="plan-price-text">R$ 29,99</span>
                             </div>
                             <div class="plan-card" id="plan-fortnite-7" onclick="selecionarPlanoCard('fortnite', '7', '130.00', 'Fortnite Oppus Elite - 7 Dias', 'fortnite logo.jpg')">
-                                <span class="plan-duration">7 Dias</span>
-                                <span class="plan-price-text">R$ 130,00</span>
+                                <span class="plan-duration">7 Dias</span><span class="plan-price-text">R$ 130,00</span>
                             </div>
                             <div class="plan-card" id="plan-fortnite-30" onclick="selecionarPlanoCard('fortnite', '30', '275.00', 'Fortnite Oppus Elite - 30 Dias', 'fortnite logo.jpg')">
-                                <span class="plan-duration">30 Dias</span>
-                                <span class="plan-price-text">R$ 275,00</span>
+                                <span class="plan-duration">30 Dias</span><span class="plan-price-text">R$ 275,00</span>
                             </div>
                         </div>
-                        
                         <button class="btn-price" onclick="abrirCompraDinamica('fortnite')" style="background: var(--success);">Adquirir Agora</button>
-
-                        <div class="inner-features">
-                            <h3>📋 Recursos Oppus Fortnite</h3>
-                            <strong>Visuals & ESP</strong>
-                            <ul>
-                                <li>Player ESP (Caixas 2D/3D & Linhas de proximidade)</li>
-                                <li>Distância exata em tempo real & Shield Tracker</li>
-                                <li>Loot & Chest ESP avançado (Filtros por raridade)</li>
-                            </ul>
-                            <strong>Combat Engine</strong>
-                            <ul>
-                                <li>Memory Aimbot de alta performance com predição</li>
-                                <li>Círculo de FOV customizável por cores e dimensões</li>
-                                <li>Armas estáveis (No Recoil & No Spread habilitados)</li>
-                                <li>Mecanismo de proteção bypass anti-cheat ativo</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -668,56 +550,28 @@
 
         <div id="jogo-dayz" class="products-container">
             <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-dayz')">← Voltar para Categorias</button>
-            
             <div class="products-grid">
                 <div class="card">
                     <img src="dayz cheat rage.png" alt="DayZ Oppus Rage" class="product-img">
                     <h2>DayZ Oppus Rage</h2>
-                    
                     <button id="btnDayZ" class="btn-price" onclick="revelarFluxo('fluxoDayZ', 'btnDayZ')">Ver Planos e Recursos</button>
                     
                     <div id="fluxoDayZ" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoDayZ', 'btnDayZ')">✕ Minimizar Detalhes</button>
-
-                        <video class="product-video" controls>
-                            <source src="DayZAuthority - Trim.mp4" type="video/mp4">
-                        </video>
-
-                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
-                        
+                        <video class="product-video" controls><source src="DayZAuthority - Trim.mp4" type="video/mp4"></video>
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         <div class="plans-container">
                             <div class="plan-card selected" id="plan-dayz-1" onclick="selecionarPlanoCard('dayz', '1', '30.00', 'DayZ Oppus Rage - 1 Dia', 'dayz cheat rage.png')">
-                                <span class="plan-duration">1 Dia</span>
-                                <span class="plan-price-text">R$ 30,00</span>
+                                <span class="plan-duration">1 Dia</span><span class="plan-price-text">R$ 30,00</span>
                             </div>
                             <div class="plan-card" id="plan-dayz-7" onclick="selecionarPlanoCard('dayz', '7', '115.00', 'DayZ Oppus Rage - 7 Dias', 'dayz cheat rage.png')">
-                                <span class="plan-duration">7 Dias</span>
-                                <span class="plan-price-text">R$ 115,00</span>
+                                <span class="plan-duration">7 Dias</span><span class="plan-price-text">R$ 115,00</span>
                             </div>
                             <div class="plan-card" id="plan-dayz-30" onclick="selecionarPlanoCard('dayz', '30', '220.00', 'DayZ Oppus Rage - 30 Dias', 'dayz cheat rage.png')">
-                                <span class="plan-duration">30 Dias</span>
-                                <span class="plan-price-text">R$ 220,00</span>
+                                <span class="plan-duration">30 Dias</span><span class="plan-price-text">R$ 220,00</span>
                             </div>
                         </div>
-                        
                         <button class="btn-price" onclick="abrirCompraDinamica('dayz')" style="background: var(--success);">Adquirir Agora</button>
-
-                        <div class="inner-features">
-                            <h3>📋 Recursos Oppus DayZ</h3>
-                            <strong>Visual Filters</strong>
-                            <ul>
-                                <li>Jogadores & Zumbis (Esqueleto e caixas táteis)</li>
-                                <li>Loot Avançado (Comida, Remédios, Armas e Roupas)</li>
-                                <li>Exibição detalhada de itens em mãos do alvo</li>
-                                <li>World ESP (Carros ativos, Peças e estruturas de Base)</li>
-                            </ul>
-                            <strong>Exploits & Auxiliares</strong>
-                            <ul>
-                                <li>Silent Aimbot cirúrgico configurável por osso</li>
-                                <li>Noclip vertical/horizontal suave para superfícies</li>
-                                <li>Sempre Dia (Bypass de iluminação de servidores)</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -725,67 +579,84 @@
 
         <div id="jogo-cs2" class="products-container">
             <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-cs2')">← Voltar para Categorias</button>
-            
             <div class="products-grid">
                 <div class="card">
                     <img src="cs2 logo.png" alt="CS2 Oppus Internal" class="product-img">
                     <h2>CS2 Oppus Internal</h2>
-                    
                     <button id="btnCS2" class="btn-price" onclick="revelarFluxo('fluxoCS2', 'btnCS2')">Ver Planos e Recursos</button>
                     
                     <div id="fluxoCS2" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoCS2', 'btnCS2')">✕ Minimizar Detalhes</button>
-
-                        <video class="product-video" controls>
-                            <source src="cs2_intro.mp4" type="video/mp4">
-                        </video>
-
-                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
-                        
+                        <video class="product-video" controls><source src="cs2_intro.mp4" type="video/mp4"></video>
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         <div class="plans-container">
                             <div class="plan-card selected" id="plan-cs2-1" onclick="selecionarPlanoCard('cs2', '1', '25.00', 'CS2 Oppus Internal - 1 Dia', 'cs2 logo.png')">
-                                <span class="plan-duration">1 Dia</span>
-                                <span class="plan-price-text">R$ 25,00</span>
+                                <span class="plan-duration">1 Dia</span><span class="plan-price-text">R$ 25,00</span>
                             </div>
                             <div class="plan-card" id="plan-cs2-7" onclick="selecionarPlanoCard('cs2', '7', '110.00', 'CS2 Oppus Internal - 7 Dias', 'cs2 logo.png')">
-                                <span class="plan-duration">7 Dias</span>
-                                <span class="plan-price-text">R$ 110,00</span>
+                                <span class="plan-duration">7 Dias</span><span class="plan-price-text">R$ 110,00</span>
                             </div>
                             <div class="plan-card" id="plan-cs2-30" onclick="selecionarPlanoCard('cs2', '30', '240.00', 'CS2 Oppus Internal - 30 Dias', 'cs2 logo.png')">
-                                <span class="plan-duration">30 Dias</span>
-                                <span class="plan-price-text">R$ 240,00</span>
+                                <span class="plan-duration">30 Dias</span><span class="plan-price-text">R$ 240,00</span>
                             </div>
                         </div>
-                        
                         <button class="btn-price" onclick="abrirCompraDinamica('cs2')" style="background: var(--success);">Adquirir Agora</button>
-
-                        <div class="inner-features">
-                            <h3>📋 Recursos Oppus CS2</h3>
-                            <strong>Visuals & Overlay</strong>
-                            <ul>
-                                <li>Glow ESP & Chams texturizados (Visível/Invisível)</li>
-                                <li>Bone Skeleton 3D & Box delimitador</li>
-                                <li>Informações de Armas, Colete e HP dos adversários</li>
-                                <li>Radar 2D Interno customizável no display</li>
-                            </ul>
-                            <strong>Legit & Rage Combat</strong>
-                            <ul>
-                                <li>Aimbot Inteligente com ajuste de Smooth & Fov perfeito</li>
-                                <li>Triggerbot ultra veloz com delay configurável em ms</li>
-                                <li>Recoil Control System (RCS) standalone ajustável</li>
-                                <li>Proteção anti-cheat de memória reforçada (Bypass)</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div id="jogo-spoofers" class="products-container">
+            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-spoofers')">← Voltar para Categorias</button>
+            <div class="products-grid">
+                
+                <div class="card">
+                    <img src="spoffer oppus.png" alt="Oppus Spoofer" class="product-img">
+                    <h2>Oppus Spoofer</h2>
+                    <button id="btnSpoofer" class="btn-price" onclick="revelarFluxo('fluxoSpoofer', 'btnSpoofer')">Ver Planos e Recursos</button>
+                    
+                    <div id="fluxoSpoofer" class="hidden-purchase-flow">
+                        <button class="btn-minimize" onclick="minimizarFluxo('fluxoSpoofer', 'btnSpoofer')">✕ Minimizar Detalhes</button>
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">1. Selecione um Plano:</p>
+                        <div class="plans-container">
+                            <div class="plan-card selected" id="plan-spoofer-1" onclick="selecionarPlanoCard('spoofer', '1', '15.00', 'Oppus Spoofer - 1 Dia', 'spoffer oppus.png')">
+                                <span class="plan-duration">1 Dia</span><span class="plan-price-text">R$ 15,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-spoofer-7" onclick="selecionarPlanoCard('spoofer', '7', '75.00', 'Oppus Spoofer - 7 Dias', 'spoffer oppus.png')">
+                                <span class="plan-duration">7 Dias</span><span class="plan-price-text">R$ 75,00</span>
+                            </div>
+                            <div class="plan-card" id="plan-spoofer-30" onclick="selecionarPlanoCard('spoofer', '30', '99.99', 'Oppus Spoofer - 30 Dias', 'spoffer oppus.png')">
+                                <span class="plan-duration">30 Dias</span><span class="plan-price-text">R$ 99,99</span>
+                            </div>
+                        </div>
+                        <button class="btn-price" onclick="abrirCompraDinamica('spoofer')" style="background: var(--success);">Adquirir Agora</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="spoofer perma.png" alt="Oppus Spoofer perm unban" class="product-img">
+                    <h2>Oppus Spoofer perm unban</h2>
+                    <button id="btnSpooferPerm" class="btn-price" onclick="revelarFluxo('fluxoSpooferPerm', 'btnSpooferPerm')">Ver Planos e Recursos</button>
+                    
+                    <div id="fluxoSpooferPerm" class="hidden-purchase-flow">
+                        <button class="btn-minimize" onclick="minimizarFluxo('fluxoSpooferPerm', 'btnSpooferPerm')">✕ Minimizar Detalhes</button>
+                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">1. Selecione um Plano:</p>
+                        <div class="plans-container single-plan">
+                            <div class="plan-card selected" id="plan-spooferperm-1" onclick="selecionarPlanoCard('spooferperm', '1', '149.99', 'Oppus Spoofer perm unban - Vitalício', 'spoofer perma.png')">
+                                <span class="plan-duration">Vitalício</span><span class="plan-price-text">R$ 149,99</span>
+                            </div>
+                        </div>
+                        <button class="btn-price" onclick="abrirCompraDinamica('spooferperm')" style="background: var(--success);">Adquirir Agora</button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
     </div>
 
     <div class="roleta-trigger-popup" onclick="abrirModal('roleta')">
-        <span>🎡</span>
-        <p>Roleta Diária Disponível!</p>
+        <span>🎡</span><p>Roleta Diária Disponível!</p>
     </div>
 
     <div id="modalPagamento" class="modal-overlay">
@@ -798,7 +669,6 @@
                 <div>
                     <h2 id="modalProdutoNome" style="font-size: 1.5rem; font-weight: 700; margin-bottom: 5px;">Produto</h2>
                     <div id="modalProdutoValor" style="font-size: 2.2rem; color: var(--accent); font-weight: 800; margin-bottom: 12px;">R$ 0,00</div>
-                    
                     <div class="pix-area">
                         <div style="background: white; padding: 10px; border-radius: 8px;">
                             <div style="width: 200px; height: 200px; background: #222; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8rem; text-align: center;">QR CODE AUTOMÁTICO</div>
@@ -815,7 +685,9 @@
             r6: { nome: 'R6 Oppus Rage - 1 Dia', preco: '30.00', img: 'r6cheat rage.jpg' },
             fortnite: { nome: 'Fortnite Oppus Elite - 1 Dia', preco: '29.99', img: 'fortnite logo.jpg' },
             dayz: { nome: 'DayZ Oppus Rage - 1 Dia', preco: '30.00', img: 'dayz cheat rage.png' },
-            cs2: { nome: 'CS2 Oppus Internal - 1 Dia', preco: '25.00', img: 'cs2 logo.png' }
+            cs2: { nome: 'CS2 Oppus Internal - 1 Dia', preco: '25.00', img: 'cs2 logo.png' },
+            spoofer: { nome: 'Oppus Spoofer - 1 Dia', preco: '15.00', img: 'spoffer oppus.png' },
+            spooferperm: { nome: 'Oppus Spoofer perm unban - Vitalício', preco: '149.99', img: 'spoofer perma.png' }
         };
 
         function mudarAba(aba) {
@@ -892,9 +764,7 @@
         }
 
         function pausarVideos() {
-            document.querySelectorAll('video').forEach(video => {
-                video.pause();
-            });
+            document.querySelectorAll('video').forEach(video => { video.pause(); });
         }
     </script>
 </body>
