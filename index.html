@@ -349,38 +349,10 @@
             gap: 15px; 
             margin-top: 20px; 
             background: rgba(0,0,0,0.25); 
-            padding: 20px; 
+            padding: 25px; 
             border-radius: 16px; 
             border: 1px solid rgba(255,255,255,0.03); 
-        }
-
-        .qrcode-container {
-            background: white;
-            padding: 10px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .qrcode-img { width: 280px; height: 280px; object-fit: contain; display: block; }
-        
-        .btn-copy { 
-            background: var(--success); 
-            color: white; 
-            border: none; 
-            padding: 12px 24px; 
-            border-radius: 10px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            font-size: 0.95rem; 
-            transition: 0.2s; 
-            width: 100%; 
-        }
-
-        .btn-copy:hover { 
-            background: #1ea750; 
-            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.2); 
+            width: 100%;
         }
         
         .roleta-trigger-popup {
@@ -437,7 +409,6 @@
         .btn-action-discord { background: #5865F2; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; width: 100%; transition: 0.2s; }
         .btn-action-discord:hover { background: #4752c4; }
 
-        /* TOAST CONTAINER PARA EXIBIÇÃO NA TELA EM VEZ DE POP-UPS */
         .toast-container {
             position: fixed;
             bottom: 30px;
@@ -724,9 +695,6 @@
                     <h2 id="modalProdutoNome" style="font-size: 1.5rem; font-weight: 700; margin-bottom: 5px;">Produto</h2>
                     <div id="modalProdutoValor" style="font-size: 2.2rem; color: var(--accent); font-weight: 800; margin-bottom: 12px;">R$ 0,00</div>
                     <div class="pix-area">
-                        <div class="qrcode-container">
-                            <img src="image_e0885e.png" alt="QR Code PIX" class="qrcode-img">
-                        </div>
                         <button class="btn-copy" onclick="copiarPixCodigo()">Copiar Código Copia e Cola</button>
                     </div>
                 </div>
@@ -758,6 +726,9 @@
     </div>
 
     <script>
+        // COLOQUE SEU LINK DO PIX COPIA E COLA ENTRE AS ASPAS ABAIXO:
+        const linkPixFixo = "SEU_LINK_DO_PIX_AQUI";
+
         let planosSelecionados = {
             r6: { nome: 'R6 Oppus Rage - 1 Dia', preco: '30.00', img: 'r6cheat rage.jpg' },
             fortnite: { nome: 'Fortnite Oppus Elite - 1 Dia', preco: '29.99', img: 'fortnite logo.jpg' },
@@ -766,11 +737,10 @@
             spoofer: { nome: 'Oppus Spoofer - 1 Dia', preco: '20.00', img: 'spoffer oppus.png' }
         };
 
-        // FUNÇÃO TOAST: ADICIONA AS MENSAGENS DIRETAMENTE NA TELA COORDENADAS COM CSS
         function mostrarAvisoTela(mensagem, icone = "⚡") {
             const toast = document.getElementById('toastNotification');
             document.getElementById('toastIcon').innerText = icone;
-            document.getElementById('toastMessage').innerText = message = mensagem;
+            document.getElementById('toastMessage').innerText = mensagem;
             
             toast.classList.add('show');
             setTimeout(() => {
@@ -779,7 +749,11 @@
         }
 
         function copiarPixCodigo() {
-            mostrarAvisoTela("Código PIX Copia e Cola copiado com sucesso!", "✅");
+            navigator.clipboard.writeText(linkPixFixo).then(() => {
+                mostrarAvisoTela("Código PIX Copia e Cola copiado com sucesso!", "✅");
+            }).catch(() => {
+                mostrarAvisoTela("Erro ao copiar automaticamente. Verifique o link definido.", "❌");
+            });
         }
 
         function girarRoletaVeradeira() {
