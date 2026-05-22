@@ -248,10 +248,10 @@
         
         .card h2 { margin-bottom: 20px; font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; }
         .product-img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
-        .product-video { width: 100%; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px; background-color: #000; }
+        .product-video { width: 100%; display: block; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px; background-color: #000; }
 
         /* Fluxo de Compra Integrado */
-        .hidden-purchase-flow { display: none; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 25px; animation: fadeIn 0.3s ease; }
+        .hidden-purchase-flow { display: none; width: 100%; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 25px; animation: fadeIn 0.3s ease; text-align: left; }
         
         .btn-minimize { 
             background: rgba(239, 68, 68, 0.08); 
@@ -264,6 +264,9 @@
             cursor: pointer; 
             margin-bottom: 25px; 
             transition: 0.2s; 
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .btn-minimize:hover { background: #ef4444; color: #fff; }
@@ -281,6 +284,7 @@
             transition: all 0.2s ease; 
             display: flex; 
             flex-direction: column; 
+            align-items: center;
             gap: 4px; 
         }
 
@@ -544,11 +548,6 @@
                     <img src="cs2 logo.png" alt="Counter Strike 2" class="category-img">
                     <div class="category-name">Counter-Strike 2</div>
                 </div>
-
-                <div class="category-card" onclick="mostrarProdutosJogo('jogo-spoofers')">
-                    <img src="spoffer oppus.png" alt="Spoofers" class="category-img">
-                    <div class="category-name">Spoofers</div>
-                </div>
             </div>
         </div>
 
@@ -564,6 +563,10 @@
                     
                     <div id="fluxoR6" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoR6', 'btnR6')">✕ Minimizar Detalhes</button>
+
+                        <video class="product-video" controls>
+                            <source src="crusader_intro - Trim.mp4" type="video/mp4">
+                        </video>
 
                         <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         
@@ -619,6 +622,10 @@
                     <div id="fluxoFortnite" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoFortnite', 'btnFortnite')">✕ Minimizar Detalhes</button>
 
+                        <video class="product-video" controls>
+                            <source src="fortnite_intro.mp4" type="video/mp4">
+                        </video>
+
                         <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         
                         <div class="plans-container">
@@ -671,6 +678,10 @@
                     
                     <div id="fluxoDayZ" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoDayZ', 'btnDayZ')">✕ Minimizar Detalhes</button>
+
+                        <video class="product-video" controls>
+                            <source src="DayZAuthority - Trim.mp4" type="video/mp4">
+                        </video>
 
                         <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         
@@ -725,6 +736,10 @@
                     <div id="fluxoCS2" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoCS2', 'btnCS2')">✕ Minimizar Detalhes</button>
 
+                        <video class="product-video" controls>
+                            <source src="cs2_intro.mp4" type="video/mp4">
+                        </video>
+
                         <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         
                         <div class="plans-container">
@@ -756,88 +771,9 @@
                             <strong>Legit & Rage Combat</strong>
                             <ul>
                                 <li>Aimbot Inteligente com ajuste de Smooth & Fov perfeito</li>
-                                <li>Triggerbot ultra veloz com delay configurável in ms</li>
+                                <li>Triggerbot ultra veloz com delay configurável em ms</li>
                                 <li>Recoil Control System (RCS) standalone ajustável</li>
                                 <li>Proteção anti-cheat de memória reforçada (Bypass)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="jogo-spoofers" class="products-container">
-            <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-spoofers')">← Voltar para Categorias</button>
-            
-            <div class="products-grid">
-                <div class="card">
-                    <img src="spoffer oppus.png" alt="Oppus Spoofer" class="product-img">
-                    <h2>Oppus Spoofer</h2>
-                    
-                    <button id="btnSpoofer" class="btn-price" onclick="revelarFluxo('fluxoSpoofer', 'btnSpoofer')">Ver Planos e Recursos</button>
-                    
-                    <div id="fluxoSpoofer" class="hidden-purchase-flow">
-                        <button class="btn-minimize" onclick="minimizarFluxo('fluxoSpoofer', 'btnSpoofer')">✕ Minimizar Detalhes</button>
-
-                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
-                        
-                        <div class="plans-container">
-                            <div class="plan-card selected" id="plan-spoofer-1" onclick="selecionarPlanoCard('spoofer', '1', '15.00', 'Oppus Spoofer - 1 Dia', 'spoffer oppus.png')">
-                                <span class="plan-duration">1 Dia</span>
-                                <span class="plan-price-text">R$ 15,00</span>
-                            </div>
-                            <div class="plan-card" id="plan-spoofer-7" onclick="selecionarPlanoCard('spoofer', '7', '75.00', 'Oppus Spoofer - 7 Dias', 'spoffer oppus.png')">
-                                <span class="plan-duration">7 Dias</span>
-                                <span class="plan-price-text">R$ 75,00</span>
-                            </div>
-                            <div class="plan-card" id="plan-spoofer-30" onclick="selecionarPlanoCard('spoofer', '30', '99.99', 'Oppus Spoofer - 30 Dias', 'spoffer oppus.png')">
-                                <span class="plan-duration">30 Dias</span>
-                                <span class="plan-price-text">R$ 99,99</span>
-                            </div>
-                        </div>
-                        
-                        <button class="btn-price" onclick="abrirCompraDinamica('spoofer')" style="background: var(--success);">Adquirir Agora</button>
-
-                        <div class="inner-features">
-                            <h3>📋 Recursos Oppus Spoofer</h3>
-                            <strong>Proteção de Hardware</strong>
-                            <ul>
-                                <li>Limpeza profunda de registros de rastreamento antigos</li>
-                                <li>Modificação dinâmica de HWID (Disk, Motherboard, GPU)</li>
-                                <li>Bypass preventivo e atualizações constantes</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="spoofer perma.png" alt="Oppus Spoofer perm unban" class="product-img">
-                    <h2>Oppus Spoofer perm unban</h2>
-                    
-                    <button id="btnSpooferPerm" class="btn-price" onclick="revelarFluxo('fluxoSpooferPerm', 'btnSpooferPerm')">Ver Planos e Recursos</button>
-                    
-                    <div id="fluxoSpooferPerm" class="hidden-purchase-flow">
-                        <button class="btn-minimize" onclick="minimizarFluxo('fluxoSpooferPerm', 'btnSpooferPerm')">✕ Minimizar Detalhes</button>
-
-                        <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; text-align: left; margin-bottom: 5px;">1. Selecione um Plano:</p>
-                        
-                        <div class="plans-container single-plan">
-                            <div class="plan-card selected" id="plan-spooferperm-1" onclick="selecionarPlanoCard('spooferperm', '1', '149.99', 'Oppus Spoofer perm unban - Vitalício', 'spoofer perma.png')">
-                                <span class="plan-duration">Vitalício</span>
-                                <span class="plan-price-text">R$ 149,99</span>
-                            </div>
-                        </div>
-                        
-                        <button class="btn-price" onclick="abrirCompraDinamica('spooferperm')" style="background: var(--success);">Adquirir Agora</button>
-
-                        <div class="inner-features">
-                            <h3>📋 Recursos Perm Unban</h3>
-                            <strong>Remoção Permanente</strong>
-                            <ul>
-                                <li>Acesso Vitalício ilimitado com suporte prioritário</li>
-                                <li>Remoção definitiva de shadowbans e restrições persistentes</li>
-                                <li>Otimização avançada de rede e alteração de MAC Spoofing</li>
-                                <li>Compatibilidade estendida com múltiplos sistemas operacionais</li>
                             </ul>
                         </div>
                     </div>
@@ -865,9 +801,9 @@
                     
                     <div class="pix-area">
                         <div style="background: white; padding: 10px; border-radius: 8px;">
-                            <div style="width: 200px; height: 200px; background: #222; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8rem; text-align: center;">QR CODE AUTOMÁTICO SIMULADO</div>
+                            <div style="width: 200px; height: 200px; background: #222; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8rem; text-align: center;">QR CODE AUTOMÁTICO</div>
                         </div>
-                        <button class="btn-copy" onclick="alert('Código PIX Copiado com Sucesso!')">Copiar Código Copia e Cola</button>
+                        <button class="btn-copy" onclick="alert('Código PIX Copiado!')">Copiar Código Copia e Cola</button>
                     </div>
                 </div>
             </div>
@@ -875,14 +811,11 @@
     </div>
 
     <script>
-        // Estrutura para salvar o plano ativo selecionado de cada produto
         let planosSelecionados = {
             r6: { nome: 'R6 Oppus Rage - 1 Dia', preco: '30.00', img: 'r6cheat rage.jpg' },
             fortnite: { nome: 'Fortnite Oppus Elite - 1 Dia', preco: '29.99', img: 'fortnite logo.jpg' },
             dayz: { nome: 'DayZ Oppus Rage - 1 Dia', preco: '30.00', img: 'dayz cheat rage.png' },
-            cs2: { nome: 'CS2 Oppus Internal - 1 Dia', preco: '25.00', img: 'cs2 logo.png' },
-            spoofer: { nome: 'Oppus Spoofer - 1 Dia', preco: '15.00', img: 'spoffer oppus.png' },
-            spooferperm: { nome: 'Oppus Spoofer perm unban - Vitalício', preco: '149.99', img: 'spoofer perma.png' }
+            cs2: { nome: 'CS2 Oppus Internal - 1 Dia', preco: '25.00', img: 'cs2 logo.png' }
         };
 
         function mudarAba(aba) {
@@ -908,11 +841,13 @@
         function voltarParaCategorias(idJogo) {
             document.getElementById(idJogo).style.display = 'none';
             document.getElementById('wrapper-categorias').style.display = 'flex';
+            pausarVideos();
         }
 
         function voltarParaCategoriasCompleto() {
             document.querySelectorAll('.products-container').forEach(el => el.style.display = 'none');
             document.getElementById('wrapper-categorias').style.display = 'flex';
+            pausarVideos();
         }
 
         function revelarFluxo(idFluxo, idBotao) {
@@ -923,17 +858,14 @@
         function minimizarFluxo(idFluxo, idBotao) {
             document.getElementById(idFluxo).style.display = 'none';
             document.getElementById(idBotao).style.display = 'block';
+            pausarVideos();
         }
 
         function selecionarPlanoCard(produto, dias, preco, nomePlano, imgPlano) {
-            // Remove a seleção visual dos outros cards do mesmo produto
             document.querySelectorAll(`[id^="plan-${produto}-"]`).forEach(el => el.classList.remove('selected'));
-            
-            // Adiciona a seleção no card clicado
             const cardClicado = document.getElementById(`plan-${produto}-${dias}`);
             if(cardClicado) cardClicado.classList.add('selected');
 
-            // Atualiza os dados no objeto principal
             planosSelecionados[produto] = {
                 nome: nomePlano,
                 preco: preco,
@@ -946,18 +878,23 @@
             document.getElementById('modalProdutoNome').innerText = dados.nome;
             document.getElementById('modalProdutoValor').innerText = 'R$ ' + dados.preco.replace('.', ',');
             document.getElementById('modalProdutoImg').src = dados.img;
-            
             document.getElementById('modalPagamento').style.display = 'flex';
         }
 
         function abrirModal(tipo) {
             if(tipo === 'roleta') {
-                alert('Roleta Diária: Entre em nosso Discord para validar seus giros promocionais gratuitos e coletar keys!');
+                alert('Entre no nosso Discord para validar os seus giros diários!');
             }
         }
 
         function fecharModal(idModal) {
             document.getElementById(idModal).style.display = 'none';
+        }
+
+        function pausarVideos() {
+            document.querySelectorAll('video').forEach(video => {
+                video.pause();
+            });
         }
     </script>
 </body>
