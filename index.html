@@ -36,7 +36,6 @@
             line-height: 1.5;
         }
 
-        /* Fundo com efeito de profundidade */
         body::before {
             content: "";
             position: fixed;
@@ -61,7 +60,6 @@
             100% { transform: translate(60px, 40px) scale(1.15); }
         }
 
-        /* Navbar Moderna */
         nav { 
             width: 100%; 
             max-width: 1200px; 
@@ -122,7 +120,6 @@
             box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
         }
         
-        /* Sistema de Abas */
         .tab-content { 
             display: none; 
             width: 100%; 
@@ -140,7 +137,6 @@
             to { opacity: 1; transform: translateY(0); } 
         }
 
-        /* Home - Hero Section */
         .hero-section { text-align: center; margin: 60px 0 40px 0; max-width: 750px; }
         .hero-section h1 { 
             font-size: 3.2rem; 
@@ -154,7 +150,6 @@
         }
         .hero-section p { color: var(--text-muted); font-size: 1.15rem; font-weight: 400; }
         
-        /* Features Grid */
         .features-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
@@ -182,7 +177,6 @@
         .info-card h3 { margin-bottom: 12px; font-size: 1.2rem; color: #fff; font-weight: 600; }
         .info-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
         
-        /* Seção de Categorias de Jogos */
         .categories-title { text-align: center; margin: 40px 0 20px 0; font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; }
         
         .categories-grid { 
@@ -213,7 +207,6 @@
         .category-card:hover .category-img { transform: scale(1.03); }
         .category-name { padding: 20px; font-size: 1.15rem; font-weight: 700; color: #fff; background: var(--bg-secondary); text-align: center; border-top: 1px solid rgba(255,255,255,0.03); }
 
-        /* Contêiner de Produtos Individuais */
         .products-container { display: none; flex-direction: column; align-items: center; width: 100%; }
         
         .btn-back-categories { 
@@ -234,7 +227,6 @@
 
         .products-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; margin-bottom: 50px; }
         
-        /* Cartão de Produto Premium */
         .card { 
             background: var(--bg-secondary); 
             border: 1px solid rgba(255,255,255,0.05); 
@@ -250,7 +242,6 @@
         .product-img { width: 100%; height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05); }
         .product-video { width: 100%; display: block; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px; background-color: #000; }
 
-        /* Fluxo de Compra Integrado */
         .hidden-purchase-flow { display: none; width: 100%; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 25px; animation: fadeIn 0.3s ease; text-align: left; }
         
         .btn-minimize { 
@@ -271,7 +262,6 @@
 
         .btn-minimize:hover { background: #ef4444; color: #fff; }
 
-        /* Grade de Planos Otimizada */
         .plans-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 15px 0 25px 0; }
         .plans-container.single-plan { grid-template-columns: 1fr; max-width: 200px; margin: 15px auto 25px auto; }
         
@@ -315,7 +305,6 @@
 
         .btn-price:hover { background: #9d3bf7; box-shadow: 0 0 20px var(--accent-glow); }
 
-        /* Lista de Recursos (Features) Interna */
         .inner-features { text-align: left; background: rgba(0,0,0,0.2); padding: 25px; border-radius: 16px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.03); }
         .inner-features h3 { font-size: 1.1rem; color: #fff; margin-bottom: 15px; font-weight: 700; }
         .inner-features strong { font-size: 0.85rem; color: #c084fc; display: block; margin: 15px 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -324,7 +313,6 @@
         .inner-features ul li { margin-bottom: 6px; padding-left: 18px; position: relative; }
         .inner-features ul li::before { content: "✓"; color: var(--success); position: absolute; left: 0; font-weight: bold; }
 
-        /* Modais Básicos */
         .modal-overlay { 
             display: none; 
             position: fixed; 
@@ -359,7 +347,6 @@
         .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 20px; color: var(--text-muted); transition: 0.2s; }
         .close-modal:hover { color: #fff; }
 
-        /* Área de Checkout PIX */
         .pix-area { 
             display: flex; 
             flex-direction: column; 
@@ -371,6 +358,8 @@
             border-radius: 16px; 
             border: 1px solid rgba(255,255,255,0.03); 
         }
+
+        .qrcode-img { width: 200px; height: 200px; object-fit: contain; border-radius: 8px; }
         
         .btn-copy { 
             background: var(--success); 
@@ -390,7 +379,6 @@
             box-shadow: 0 5px 15px rgba(34, 197, 94, 0.2); 
         }
         
-        /* Popup da Roleta */
         .roleta-trigger-popup {
             position: fixed;
             bottom: 30px;
@@ -529,7 +517,7 @@
                     
                     <div id="fluxoFortnite" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoFortnite', 'btnFortnite')">✕ Minimizar Detalhes</button>
-                        <video class="product-video" controls><source src="fortnite_intro.mp4" type="video/mp4"></video>
+                        <video class="product-video" controls><source src="DayZAuthority - Trim.mp4" type="video/mp4"></video>
                         <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         <div class="plans-container">
                             <div class="plan-card selected" id="plan-fortnite-1" onclick="selecionarPlanoCard('fortnite', '1', '29.99', 'Fortnite Oppus Elite - 1 Dia', 'fortnite logo.jpg')">
@@ -587,7 +575,7 @@
                     
                     <div id="fluxoCS2" class="hidden-purchase-flow">
                         <button class="btn-minimize" onclick="minimizarFluxo('fluxoCS2', 'btnCS2')">✕ Minimizar Detalhes</button>
-                        <video class="product-video" controls><source src="cs2_intro.mp4" type="video/mp4"></video>
+                        <video class="product-video" controls><source src="crusader_intro - Trim.mp4" type="video/mp4"></video>
                         <p style="color: #c084fc; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px;">1. Selecione um Plano:</p>
                         <div class="plans-container">
                             <div class="plan-card selected" id="plan-cs2-1" onclick="selecionarPlanoCard('cs2', '1', '25.00', 'CS2 Oppus Internal - 1 Dia', 'cs2 logo.png')">
@@ -609,7 +597,6 @@
         <div id="jogo-spoofers" class="products-container">
             <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-spoofers')">← Voltar para Categorias</button>
             <div class="products-grid">
-                
                 <div class="card">
                     <img src="spoffer oppus.png" alt="Oppus Spoofer" class="product-img">
                     <h2>Oppus Spoofer</h2>
@@ -649,7 +636,6 @@
                         <button class="btn-price" onclick="abrirCompraDinamica('spooferperm')" style="background: var(--success);">Adquirir Agora</button>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -670,9 +656,7 @@
                     <h2 id="modalProdutoNome" style="font-size: 1.5rem; font-weight: 700; margin-bottom: 5px;">Produto</h2>
                     <div id="modalProdutoValor" style="font-size: 2.2rem; color: var(--accent); font-weight: 800; margin-bottom: 12px;">R$ 0,00</div>
                     <div class="pix-area">
-                        <div style="background: white; padding: 10px; border-radius: 8px;">
-                            <div style="width: 200px; height: 200px; background: #222; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8rem; text-align: center;">QR CODE AUTOMÁTICO</div>
-                        </div>
+                        <img src="qrcode.png" alt="QR Code PIX" class="qrcode-img">
                         <button class="btn-copy" onclick="alert('Código PIX Copiado!')">Copiar Código Copia e Cola</button>
                     </div>
                 </div>
