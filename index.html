@@ -308,7 +308,7 @@
         .inner-features ul li { margin-bottom: 6px; padding-left: 18px; position: relative; }
         .inner-features ul li::before { content: "✓"; color: var(--success); position: absolute; left: 0; font-weight: bold; }
 
-        /* MODAL DE PAGAMENTO ATUALIZADO */
+        /* MODAL DE PAGAMENTO */
         .modal-overlay { 
             display: none; 
             position: fixed; 
@@ -337,7 +337,6 @@
         .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 20px; color: var(--text-muted); transition: 0.2s; }
         .close-modal:hover { color: #fff; }
 
-        /* AREA DO QR CODE GRANDE */
         .pix-payment-area {
             display: flex;
             flex-direction: column;
@@ -460,15 +459,16 @@
                 <img src="qr_code_ampliado_2.png" alt="Pix QR Code" class="qr-code-large">
                 
                 <div class="pix-input-container">
-                    <label>Pix Copia e Cola:</label>
+                    <label>Chave Pix:</label>
                     <div class="pix-copy-wrapper">
-                        <input type="text" id="pixCodeInput" class="pix-input" value="00020101021226870014br.gov.bcb.pix2565pix-qr.vindi.com.br/qr/v2/v1/prod/3685f8bfd9a544b8b6e0bc872f2a7b8e5204000053039865802BR5925OPPUSSHOP6009SAOPAULO62070503***6304A1B2" readonly>
+                        <!-- Nova Chave Pix Aplicada Aqui -->
+                        <input type="text" id="pixCodeInput" class="pix-input" value="73277f27-666c-4ed4-9077-47e302a5f786" readonly>
                         <button class="btn-copy-pix" onclick="copiarCodigoPix()">Copiar</button>
                     </div>
                 </div>
 
                 <div class="payment-instructions">
-                    💡 <strong>Como pagar:</strong> Acesse o app do seu banco, escolha a opção <strong>Pix</strong> e depois <strong>"Scanear QR Code"</strong> ou <strong>"Pix Copia e Cola"</strong>. Após o envio, o produto é liberado automaticamente.
+                    💡 <strong>Como pagar:</strong> Acesse o app do seu banco, escolha a opção <strong>Pix</strong> e utilize a chave acima clicando no botão <strong>"Copiar"</strong>. Após o envio do comprovante no Discord, o produto é liberado.
                 </div>
             </div>
         </div>
@@ -483,6 +483,7 @@
         </div>
     </nav>
 
+    <!-- ABA INÍCIO -->
     <div id="conteudo-inicio" class="tab-content active">
         <section class="hero-section">
             <h1>Sua Performance Elevada ao Máximo</h1>
@@ -491,8 +492,8 @@
 
         <div class="features-grid">
             <div class="info-card">
-                <h3>⚡ Entrega Instantânea</h3>
-                <p>O processamento via PIX é automatizado. O acesso e chaves do produto chegam imediatamente para você após aprovação.</p>
+                <h3>⚡ Entrega Rápida</h3>
+                <p>O processamento via PIX é prático. O acesso e chaves do produto chegam para você após a validação no nosso Discord.</p>
             </div>
             <div class="info-card">
                 <h3>🔒 Segurança Máxima</h3>
@@ -505,6 +506,7 @@
         </div>
     </div>
 
+    <!-- ABA PRODUTOS -->
     <div id="conteudo-produtos" class="tab-content">
         
         <div id="wrapper-categorias" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
@@ -538,6 +540,7 @@
             </div>
         </div>
 
+        <!-- CONTAINER RAINBOW SIX -->
         <div id="jogo-r6" class="products-container">
             <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-r6')">← Voltar para Categorias</button>
             <div class="products-grid">
@@ -577,6 +580,7 @@
             </div>
         </div>
 
+        <!-- CONTAINER FORTNITE -->
         <div id="jogo-fortnite" class="products-container">
             <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-fortnite')">← Voltar para Categorias</button>
             <div class="products-grid">
@@ -614,6 +618,7 @@
             </div>
         </div>
 
+        <!-- CONTAINER DAYZ -->
         <div id="jogo-dayz" class="products-container">
             <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-dayz')">← Voltar para Categorias</button>
             <div class="products-grid">
@@ -643,6 +648,7 @@
             </div>
         </div>
 
+        <!-- CONTAINER CS2 -->
         <div id="jogo-cs2" class="products-container">
             <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-cs2')">← Voltar para Categorias</button>
             <div class="products-grid">
@@ -672,6 +678,7 @@
             </div>
         </div>
 
+        <!-- CONTAINER SPOOFER -->
         <div id="jogo-spoofer" class="products-container">
             <button class="btn-back-categories" onclick="voltarParaCategorias('jogo-spoofer')">← Voltar para Categorias</button>
             <div class="products-grid">
@@ -690,8 +697,8 @@
                             <div class="plan-card" id="plan-spoofer-7" onclick="selecionarPlanoCard('spoofer', '7', '50.00', 'Oppus Spoofer - 7 Dias')">
                                 <span class="plan-duration">7 Dias</span><span class="plan-price-text">R$ 50,00</span>
                             </div>
-                            <div class="plan-card" id="plan-spoofer-30" onclick="selecionarPlanoCard('spoofer', '30', '110.00', 'Oppus Spoofer - 30 Dias')">
-                                <span class="plan-duration">30 Dias</span><span class="plan-price-text">R$ 110,00</span>
+                            <div class="plan-card" id="plan-spoofer-30" onclick="selecionarPlanoCard('spoofer', '30', '120.00', 'Oppus Spoofer - 30 Dias')">
+                                <span class="plan-duration">30 Dias</span><span class="plan-price-text">R$ 120,00</span>
                             </div>
                         </div>
                         <button class="btn-price" onclick="abrirCompraDinamica('Oppus HWID Spoofer')" style="background: var(--success);">Adquirir Agora</button>
@@ -702,88 +709,61 @@
 
     </div>
 
+    <!-- LOGICA SCRIPT DO SITE -->
     <script>
-        // Memória para guardar os preços selecionados de cada categoria
-        let precoSelecionado = {
-            'r6': '30,00',
-            'fortnite': '29,99',
-            'dayz': '30,00',
-            'cs2': '25,00',
-            'spoofer': '20,00'
-        };
-
-        let planoNomeSelecionado = {
-            'r6': 'R6 Oppus Rage - 1 Dia',
-            'fortnite': 'Fortnite Oppus Elite - 1 Dia',
-            'dayz': 'DayZ Oppus Rage - 1 Dia',
-            'cs2': 'CS2 Oppus Internal - 1 Dia',
-            'spoofer': 'Oppus Spoofer - 1 Dia'
+        let produtoSelecionadoAtual = {
+            nome: "R6 Oppus Rage - 1 Dia",
+            preco: "30,00"
         };
 
         function mudarAba(aba) {
-            document.getElementById('conteudo-inicio').classList.remove('active');
-            document.getElementById('conteudo-produtos').classList.remove('active');
-            document.getElementById('tab-inicio').classList.remove('active');
-            document.getElementById('tab-produtos').classList.remove('active');
-
-            if(aba === 'inicio') {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
+            
+            if (aba === 'inicio') {
                 document.getElementById('conteudo-inicio').classList.add('active');
                 document.getElementById('tab-inicio').classList.add('active');
-            } else {
+            } else if (aba === 'produtos') {
                 document.getElementById('conteudo-produtos').classList.add('active');
                 document.getElementById('tab-produtos').classList.add('active');
+                voltarParaCategorias();
             }
         }
 
-        function mostrarProdutosJogo(idContainer) {
+        function mostrarProdutosJogo(idJogoContainer) {
             document.getElementById('wrapper-categorias').style.display = 'none';
-            document.getElementById(idContainer).style.display = 'flex';
+            document.querySelectorAll('.products-container').forEach(el => el.style.display = 'none');
+            document.getElementById(idJogoContainer).style.display = 'flex';
         }
 
-        function voltarParaCategorias(idContainerMaximo) {
-            document.getElementById(idContainerMaximo).style.display = 'none';
+        function voltarParaCategorias() {
+            document.querySelectorAll('.products-container').forEach(el => el.style.display = 'none');
             document.getElementById('wrapper-categorias').style.display = 'flex';
         }
 
-        function revelarFluxo(idFluxo, idBotaoOriginal) {
+        function revelarFluxo(idFluxo, idBotao) {
             document.getElementById(idFluxo).style.display = 'block';
-            document.getElementById(idBotaoOriginal).style.display = 'none';
+            document.getElementById(idBotao).style.display = 'none';
         }
 
-        function minimizarFluxo(idFluxo, idBotaoOriginal) {
+        function minimizarFluxo(idFluxo, idBotao) {
             document.getElementById(idFluxo).style.display = 'none';
-            document.getElementById(idBotaoOriginal).style.display = 'block';
+            document.getElementById(idBotao).style.display = 'block';
         }
 
-        function selecionarPlanoCard(categoria, dias, valor, nomePlano) {
-            // Remove a seleção de todos os cards daquela categoria
-            const cards = document.querySelectorAll(`[id^="plan-${categoria}-"]`);
-            cards.forEach(card => card.classList.remove('selected'));
+        function selecionarPlanoCard(jogo, dias, preco, nomeCompleto) {
+            document.querySelectorAll(`[id^="plan-${jogo}-"]`).forEach(el => el.classList.remove('selected'));
+            document.getElementById(`plan-${jogo}-${dias}`).classList.add('selected');
 
-            // Adiciona a seleção ao card clicado
-            document.getElementById(`plan-${categoria}-${dias}`).classList.add('selected');
+            let precoFormatado = parseFloat(preco).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 
-            // Formata o preço para exibição brasileria
-            let precoFormatado = parseFloat(valor).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            
-            // Salva o estado atualizado
-            precoSelecionado[categoria] = precoFormatado;
-            planoNomeSelecionado[categoria] = nomePlano;
+            produtoSelecionadoAtual.nome = nomeCompleto;
+            produtoSelecionadoAtual.preco = precoFormatado;
         }
 
-        function abrirCompraDinamica(nomeCategoriaOficial) {
-            // Mapeamento simples para pegar a chave curta da categoria atual baseado no nome passado
-            let chave = 'r6';
-            if (nomeCategoriaOficial.includes('Fortnite')) chave = 'fortnite';
-            if (nomeCategoriaOficial.includes('DayZ')) chave = 'dayz';
-            if (nomeCategoriaOficial.includes('CS2')) chave = 'cs2';
-            if (nomeCategoriaOficial.includes('Spoofer')) chave = 'spoofer';
-
-            // Define os dados no modal dinamicamente
-            document.getElementById('modalProductName').innerText = planoNomeSelecionado[chave];
-            document.getElementById('modalProductPrice').innerText = 'R$ ' + precoSelecionado[chave];
-            
-            // Exibe o modal na tela
+        function abrirCompraDinamica(nomeBaseProduto) {
+            document.getElementById('modalProductName').innerText = produtoSelecionadoAtual.nome;
+            document.getElementById('modalProductPrice').innerText = "R$ " + produtoSelecionadoAtual.preco;
             document.getElementById('paymentModal').style.display = 'flex';
         }
 
@@ -791,27 +771,29 @@
             document.getElementById('paymentModal').style.display = 'none';
         }
 
-        function copiarCodigoPix() {
-            const inputPix = document.getElementById('pixCodeInput');
-            inputPix.select();
-            inputPix.setSelectionRange(0, 99999); // Suporte para mobile
-
-            navigator.clipboard.writeText(inputPix.value).then(() => {
-                showToast("Código Copiado com Sucesso!", "⚡");
-            }).catch(() => {
-                showToast("Erro ao copiar código.", "❌");
-            });
-        }
-
-        function showToast(mensagem, icone = "⚡") {
+        function mostrarToast(mensagem, icone = "⚡") {
             const toast = document.getElementById('toastNotification');
             document.getElementById('toastIcon').innerText = icone;
-            document.getElementById('toastMessage').innerText = mensagem;
+            document.getElementById('toastMessage').innerText = message = mensagem;
             
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
+        }
+
+        function copiarCodigoPix() {
+            const inputPix = document.getElementById('pixCodeInput');
+            inputPix.select();
+            inputPix.setSelectionRange(0, 99999);
+
+            try {
+                navigator.clipboard.writeText(inputPix.value);
+                mostrarToast("Chave Pix copiada com sucesso!", "✅");
+            } catch (err) {
+                document.execCommand('copy');
+                mostrarToast("Chave Pix copiada!", "✅");
+            }
         }
     </script>
 </body>
